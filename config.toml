@@ -1,0 +1,21 @@
+baseURL = "http://example.org/"
+languageCode = "en-gb"
+title = "Alexander Jackson"
+theme = "noteworthy"
+
+[params]
+email = "alexanderjackson@protonmail.com"
+github = "alexander-jackson"
+
+[menu]
+	[[menu.main]]
+		identifier = "about"
+		name = "About Me"
+		url = "/about"
+		weight = -110
+
+	[[menu.main]]
+		identifier = "projects"
+		name = "Projects"
+		url = "/projects"
+		weight = 100

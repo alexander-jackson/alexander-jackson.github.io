@@ -1,0 +1,2 @@
+# Ignore the resources directory as it can be generated
+resources/
