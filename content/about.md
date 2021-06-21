@@ -1,6 +1,6 @@
 ---
 title: "About Me"
-draft: true
+draft: false
 ---
 
 I'm a British Computer Scientist based in the UK, currently finishing my final

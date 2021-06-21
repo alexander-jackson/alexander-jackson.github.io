@@ -1,6 +1,6 @@
 ---
 title: "Projects"
-draft: true
+draft: false
 ---
 
 Notable projects:
