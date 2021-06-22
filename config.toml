@@ -5,7 +5,7 @@ theme = "noteworthy"
 
 [params]
 email = "alexanderjackson@protonmail.com"
-github = "alexander-jackson"
+github = "https://github.com/alexander-jackson/"
 
 [menu]
 	[[menu.main]]
