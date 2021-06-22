@@ -2,6 +2,10 @@
 title: "CASTLEGUARD: Anonymised Data Streams with Guaranteed Differential Privacy"
 date: 2021-06-22
 draft: false
+tags:
+- python
+- security
+- anonymisation
 ---
 
 CASTLEGUARD is an extension of the CASTLE algorithm and provides the same

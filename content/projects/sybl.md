@@ -2,6 +2,12 @@
 title: "Sybl: Accessible Machine Learning through Ensemble Learning"
 date: 2021-06-22
 draft: false
+tags:
+- rust
+- vuejs
+- nosql
+- websockets
+- machine-learning
 ---
 
 Sybl is an accessible platform that allows users with low technical experience
