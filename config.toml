@@ -13,9 +13,3 @@ github = "alexander-jackson"
 		name = "About Me"
 		url = "/about"
 		weight = -110
-
-	[[menu.main]]
-		identifier = "projects"
-		name = "Projects"
-		url = "/projects"
-		weight = 100
