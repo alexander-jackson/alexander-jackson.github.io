@@ -1,6 +1,6 @@
 ---
 title: "Blackboards: Warwick Barbell Management"
-date: 2021-06-22
+date: 2021-03-13
 draft: false
 tags:
 - rust

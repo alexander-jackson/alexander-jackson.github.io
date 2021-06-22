@@ -1,6 +1,6 @@
 ---
 title: "Fisherman: Continuous Deployment"
-date: 2021-06-22
+date: 2021-04-24
 description: "Something"
 draft: false
 tags:
