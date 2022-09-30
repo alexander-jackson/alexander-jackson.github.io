@@ -3,7 +3,7 @@ title: "About Me"
 draft: false
 ---
 
-I'm a British Computer Scientist based in the UK, currently finishing my final
-year of an MEng in Computer Science at the University of Warwick. This site
-serves as an extension to my CV and has more in-depth discussion of projects I
-have worked on.
+I'm a software engineer, currently working at Starling Bank as a backend Java
+Engineer. This site serves as an extension to my CV, as well as a place where I
+discuss projects I have worked on in the past alongside more technical blog
+posts.
