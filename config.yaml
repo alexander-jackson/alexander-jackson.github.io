@@ -1,0 +1,18 @@
+baseURL: "https://alexander-jackson.github.io/"
+languageCode: "en-gb"
+theme: "papermod"
+
+params:
+  profileMode:
+    enabled: true
+    imageWidth: 120 # custom size
+    imageHeight: 120 # custom size
+    buttons:
+      - name: Posts
+        url: "/posts"
+      - name: Projects
+        url: "/projects"
+
+  socialIcons:
+    - name: "github"
+      url: "https://github.com/alexander-jackson"
