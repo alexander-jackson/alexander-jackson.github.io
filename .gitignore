@@ -1,2 +1,5 @@
 # Ignore the resources directory as it can be generated
 resources/
+
+# Ignore the scratchpad, likely contains unfinished code
+scratchpad/
