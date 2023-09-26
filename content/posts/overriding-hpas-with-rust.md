@@ -1,7 +1,7 @@
 ---
 title: "Overriding Kubernetes HPAs with Rust"
 date: 2023-05-09T20:01:22+01:00
-draft: true
+draft: false
 showtoc: true
 ---
 
