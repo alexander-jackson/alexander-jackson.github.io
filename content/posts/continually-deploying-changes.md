@@ -168,8 +168,41 @@ any changes I wanted to make. The `aws_instance` resource contains a
 startup.
 
 So, I wrote a small script that installed Docker and ran `f2` on a specific
-version with a given configuration file location. This allowed me to define
-something like:
+version with a given configuration file location:
+
+```bash
+#!/bin/bash
+
+# Update existing list of packages and install some basic ones
+sudo apt update
+sudo apt install -y \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  software-properties-common
+
+# Set up the Docker registry
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+  | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+  | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Update the package list and install Docker
+sudo apt update
+sudo apt install -y docker-ce
+
+# Allow the `ubuntu` user to run `docker` commands (for SSH access)
+sudo usermod -aG docker ubuntu
+
+# Start f2 itself
+sudo docker run -d \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -p 443:443 alexanderjackson/f2:${tag} -- \
+  --config s3://${config_bucket}/${config_key}
+```
+
+From there, I could define a Terraform module and use it as follows:
 
 ```tf
 module "instance" {
@@ -177,7 +210,6 @@ module "instance" {
 
   name          = "instance"
   tag           = "20231018-1716"
-  config_arn    = module.config_bucket.arn
   config_bucket = module.config_bucket.name
   config_key    = "f2/config.yaml"
   vpc_id        = aws_vpc.main.id
