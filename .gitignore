@@ -3,3 +3,6 @@ resources/
 
 # Ignore the scratchpad, likely contains unfinished code
 scratchpad/
+
+# Ignore `public` as it is also generated
+public/
