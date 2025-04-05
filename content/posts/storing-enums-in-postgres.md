@@ -9,8 +9,8 @@ majority of languages these days in some form or another. While a `String` can
 store arbitrary text of any length, an `enum` represents a finite set of values
 or variants.
 
-These are extremely useful when considering database schema design, as it
-allows you to restrict the possible set of states your system can be in.
+These are extremely useful when considering database schema design as it allows
+you to restrict the possible set of states your system can be in.
 
 Take for example, an `account` table with a `state` field:
 
