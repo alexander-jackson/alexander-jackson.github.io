@@ -8,7 +8,7 @@ Every once in a while I encounter a reason to use my favourite Git command, `git
 
 ## Problem Space
 
-Let's say we have a repository with a few commits in it, containing a simple `file.py` script with some functions in it:
+Say we have a repository with a few commits in it, containing a simple `file.py` script with some functions in it:
 
 ```bash
 ~/c/showcase> git log
