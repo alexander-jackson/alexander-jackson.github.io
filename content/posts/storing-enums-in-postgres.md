@@ -220,6 +220,11 @@ Generally speaking, working with the constraints is pretty straightforward.
 While adding a variant is more difficult, it's the same difficulty as removing
 a variant, and some automation it's fairly safe to add and remove values.
 
+Be aware though, validating a check constraint on a large table can take a
+significant amount of time. You may want to pick a different approach if you
+are regularly adding or removing variants, as both operations will take an
+equal amount of time.
+
 ### Reference Tables
 
 Another possibility is a reference table. These store a mapping of an `id`
@@ -315,10 +320,10 @@ as much flexibility as it could.
 
 Check constraints are a little more complex to work with, but are symmetric in
 their difficulty to add or remove variants. With some automation they can be
-quite straightforward to manipulate, however they are less obvious to the
-developer and thus can cause mistakes to be caught later.
+quite straightforward to manipulate, but they are less obvious to the developer
+and thus can cause mistakes to be caught later.
 
-Reference tables make queries more complicated, but they provide easy
-ergonomics for adding and removing values in smaller databases. With support
-from indexes, you can still trivially remove values without taking long-lived
+Reference tables make queries more complicated, but provide good ergonomics
+when adding and removing values in smaller databases. With support from
+indexes, you can still trivially remove values without taking long-lived
 database locks or causing performance issues.
