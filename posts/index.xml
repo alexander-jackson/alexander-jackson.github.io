@@ -1,38 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on</title><link>https://alexander-jackson.github.io/posts/</link><description>Recent content in Posts on</description><generator>Hugo -- 0.147.1</generator><language>en-gb</language><lastBuildDate>Fri, 02 May 2025 16:01:34 +0100</lastBuildDate><atom:link href="https://alexander-jackson.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Bisecting Commits</title><link>https://alexander-jackson.github.io/posts/bisecting-commits/</link><pubDate>Fri, 02 May 2025 16:01:34 +0100</pubDate><guid>https://alexander-jackson.github.io/posts/bisecting-commits/</guid><description>&lt;p>Every once in a while I encounter a reason to use my favourite Git command, &lt;code>git bisect&lt;/code>.&lt;/p>
-&lt;h2 id="problem-space">Problem Space&lt;/h2>
-&lt;p>Say we have a repository with a few commits in it, containing a simple &lt;code>file.py&lt;/code> script with some functions in it:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>~/c/showcase&amp;gt; git log
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>475a134 &lt;span style="color:#f92672">(&lt;/span>HEAD -&amp;gt; master&lt;span style="color:#f92672">)&lt;/span> fix: call the &lt;span style="color:#e6db74">`&lt;/span>main&lt;span style="color:#e6db74">`&lt;/span> &lt;span style="color:#66d9ef">function&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bafdb17 feat: add some basic functionality
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>a1f3745 feat: define &lt;span style="color:#e6db74">`&lt;/span>divide&lt;span style="color:#e6db74">`&lt;/span> &lt;span style="color:#66d9ef">function&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0d84ce9 feat: define &lt;span style="color:#e6db74">`&lt;/span>multiply&lt;span style="color:#e6db74">`&lt;/span> &lt;span style="color:#66d9ef">function&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>676689d chore: no-op refactoring
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e94ec21 feat: define &lt;span style="color:#e6db74">`&lt;/span>subtract&lt;span style="color:#e6db74">`&lt;/span> &lt;span style="color:#66d9ef">function&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>de5d193 feat: define &lt;span style="color:#e6db74">`&lt;/span>add&lt;span style="color:#e6db74">`&lt;/span> &lt;span style="color:#66d9ef">function&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>0c0dd22 chore: initial commit
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>At some point, one of the commits broke the &lt;code>subtract&lt;/code> function. We don&amp;rsquo;t know which one it was, but we have a separate file that uses it called &lt;code>harness.py&lt;/code>:&lt;/p></description></item><item><title>Storing Enums in PostgreSQL</title><link>https://alexander-jackson.github.io/posts/storing-enums-in-postgres/</link><pubDate>Sat, 05 Apr 2025 06:41:01 +0000</pubDate><guid>https://alexander-jackson.github.io/posts/storing-enums-in-postgres/</guid><description>&lt;p>Enumerations (or enums) are a wonderful concept that are supported in the
-majority of languages these days in some form or another. While a &lt;code>String&lt;/code> can
-store arbitrary text of any length, an &lt;code>enum&lt;/code> represents a finite set of values
-or variants.&lt;/p>
-&lt;p>These are extremely useful when considering database schema design as it allows
-you to restrict the possible set of states your system can be in.&lt;/p>
-&lt;p>Take for example, an &lt;code>account&lt;/code> table with a &lt;code>state&lt;/code> field:&lt;/p></description></item><item><title>Postgres Lock Tricks</title><link>https://alexander-jackson.github.io/posts/postgres-lock-tricks/</link><pubDate>Sat, 24 Aug 2024 17:25:00 +0100</pubDate><guid>https://alexander-jackson.github.io/posts/postgres-lock-tricks/</guid><description>&lt;p>Postgres is a much loved relational database system that provides solid
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on</title><link>https://alexander-jackson.github.io/posts/</link><description>Recent content in Posts on</description><generator>Hugo -- 0.152.2</generator><language>en-gb</language><lastBuildDate>Sat, 22 Nov 2025 18:24:08 +0000</lastBuildDate><atom:link href="https://alexander-jackson.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Immutable Schemas</title><link>https://alexander-jackson.github.io/posts/immutable-schemas/</link><pubDate>Sat, 22 Nov 2025 18:24:08 +0000</pubDate><guid>https://alexander-jackson.github.io/posts/immutable-schemas/</guid><description>&lt;p&gt;Representing data in any application is a difficult problem to solve involving
+many different tradeoffs. Let&amp;rsquo;s imagine we want to store information about a
+purchase:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;CREATE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;TABLE&lt;/span&gt; purchase (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id BIGINT &lt;span style="color:#66d9ef"&gt;GENERATED&lt;/span&gt; ALWAYS &lt;span style="color:#66d9ef"&gt;AS&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;IDENTITY&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; purchase_uid UUID &lt;span style="color:#66d9ef"&gt;NOT&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;NULL&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; created_at &lt;span style="color:#66d9ef"&gt;TIMESTAMP&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;WITH&lt;/span&gt; TIME &lt;span style="color:#66d9ef"&gt;ZONE&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;NOT&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;NULL&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;CONSTRAINT&lt;/span&gt; pk_purchase &lt;span style="color:#66d9ef"&gt;PRIMARY&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;KEY&lt;/span&gt; (id),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;CONSTRAINT&lt;/span&gt; uk_purchase_purchase_uid &lt;span style="color:#66d9ef"&gt;UNIQUE&lt;/span&gt; (purchase_uid)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;At a given point in time, a purchase might be in one of a few states:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pending (the customer has requested the item)&lt;/li&gt;
+&lt;li&gt;Settled (the payment has transacted)&lt;/li&gt;
+&lt;li&gt;Dispatched (the item has been sent for delivery)&lt;/li&gt;
+&lt;li&gt;Delivered (the customer has the item)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Our first intuition might storing a &lt;code&gt;status&lt;/code&gt; column on the table:&lt;/p&gt;</description></item><item><title>Bisecting Commits</title><link>https://alexander-jackson.github.io/posts/bisecting-commits/</link><pubDate>Fri, 02 May 2025 16:01:34 +0100</pubDate><guid>https://alexander-jackson.github.io/posts/bisecting-commits/</guid><description>&lt;p&gt;Every once in a while I encounter a reason to use my favourite Git command, &lt;code&gt;git bisect&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="problem-space"&gt;Problem Space&lt;/h2&gt;
+&lt;p&gt;Say we have a repository with a few commits in it, containing a simple &lt;code&gt;file.py&lt;/code&gt; script with some functions in it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~/c/showcase&amp;gt; git log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;475a134 &lt;span style="color:#f92672"&gt;(&lt;/span&gt;HEAD -&amp;gt; master&lt;span style="color:#f92672"&gt;)&lt;/span&gt; fix: call the &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;main&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bafdb17 feat: add some basic functionality
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;a1f3745 feat: define &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;divide&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;0d84ce9 feat: define &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;multiply&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;676689d chore: no-op refactoring
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;e94ec21 feat: define &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;subtract&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;de5d193 feat: define &lt;span style="color:#e6db74"&gt;`&lt;/span&gt;add&lt;span style="color:#e6db74"&gt;`&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;0c0dd22 chore: initial commit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;At some point, one of the commits broke the &lt;code&gt;subtract&lt;/code&gt; function. We don&amp;rsquo;t know which one it was, but we have a separate file that uses it called &lt;code&gt;harness.py&lt;/code&gt;:&lt;/p&gt;</description></item><item><title>Storing Enums in PostgreSQL</title><link>https://alexander-jackson.github.io/posts/storing-enums-in-postgres/</link><pubDate>Sat, 05 Apr 2025 06:41:01 +0000</pubDate><guid>https://alexander-jackson.github.io/posts/storing-enums-in-postgres/</guid><description>&lt;p&gt;Enumerations (or enums) are a wonderful concept that are supported in the
+majority of languages these days in some form or another. While a &lt;code&gt;String&lt;/code&gt; can
+store arbitrary text of any length, an &lt;code&gt;enum&lt;/code&gt; represents a finite set of values
+or variants.&lt;/p&gt;
+&lt;p&gt;These are extremely useful when considering database schema design as it allows
+you to restrict the possible set of states your system can be in.&lt;/p&gt;
+&lt;p&gt;Take for example, an &lt;code&gt;account&lt;/code&gt; table with a &lt;code&gt;state&lt;/code&gt; field:&lt;/p&gt;</description></item><item><title>Postgres Lock Tricks</title><link>https://alexander-jackson.github.io/posts/postgres-lock-tricks/</link><pubDate>Sat, 24 Aug 2024 17:25:00 +0100</pubDate><guid>https://alexander-jackson.github.io/posts/postgres-lock-tricks/</guid><description>&lt;p&gt;Postgres is a much loved relational database system that provides solid
 performance and reliability. However, the concurrency model that it provides
 (MVCC - multi-version concurrency control) can lead to some interesting
-observations.&lt;/p>
-&lt;h2 id="how-does-mvcc-work">How does MVCC work?&lt;/h2>
-&lt;p>Multi-version concurrency control is not a simple system to explain. It&amp;rsquo;s worth
-reading the &lt;a href="https://www.postgresql.org/docs/current/mvcc.html">Postgres documentation&lt;/a> if you&amp;rsquo;re interested in
-going deeper with it, but this section aims to provide a small overview.&lt;/p>
-&lt;h3 id="read-committed-isolation-level">Read Committed Isolation Level&lt;/h3>
-&lt;p>This is the default value for transaction isolation in Postgres and the only
-one we&amp;rsquo;ll be discussing in this article. The documentation states:&lt;/p></description></item><item><title>Overriding Kubernetes HPAs with Rust</title><link>https://alexander-jackson.github.io/posts/overriding-hpas-with-rust/</link><pubDate>Tue, 26 Sep 2023 00:00:00 +0000</pubDate><guid>https://alexander-jackson.github.io/posts/overriding-hpas-with-rust/</guid><description>&lt;p>&lt;a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">Horizontal Pod Autoscalers&lt;/a> (HPAs) are a common concept in the
+observations.&lt;/p&gt;
+&lt;h2 id="how-does-mvcc-work"&gt;How does MVCC work?&lt;/h2&gt;
+&lt;p&gt;Multi-version concurrency control is not a simple system to explain. It&amp;rsquo;s worth
+reading the &lt;a href="https://www.postgresql.org/docs/current/mvcc.html"&gt;Postgres documentation&lt;/a&gt; if you&amp;rsquo;re interested in
+going deeper with it, but this section aims to provide a small overview.&lt;/p&gt;
+&lt;h3 id="read-committed-isolation-level"&gt;Read Committed Isolation Level&lt;/h3&gt;
+&lt;p&gt;This is the default value for transaction isolation in Postgres and the only
+one we&amp;rsquo;ll be discussing in this article. The documentation states:&lt;/p&gt;</description></item><item><title>Overriding Kubernetes HPAs with Rust</title><link>https://alexander-jackson.github.io/posts/overriding-hpas-with-rust/</link><pubDate>Tue, 26 Sep 2023 00:00:00 +0000</pubDate><guid>https://alexander-jackson.github.io/posts/overriding-hpas-with-rust/</guid><description>&lt;p&gt;&lt;a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/"&gt;Horizontal Pod Autoscalers&lt;/a&gt; (HPAs) are a common concept in the
 world of Kubernetes. They allow you to specify that your workloads should scale
 based on various factors, such as their CPU or memory consumption. You can also
 extend them with custom plugins such as the
-&lt;a href="https://github.com/kubernetes-sigs/prometheus-adapter">prometheus-adapter&lt;/a> to scale based on Prometheus metrics.&lt;/p>
-&lt;p>However, sometimes you just want to tell Kubernetes &amp;ldquo;give me more pods&amp;rdquo;.&lt;/p>
-&lt;p>Perhaps you&amp;rsquo;ve built up a backlog somewhere in the system, such as a processing
+&lt;a href="https://github.com/kubernetes-sigs/prometheus-adapter"&gt;prometheus-adapter&lt;/a&gt; to scale based on Prometheus metrics.&lt;/p&gt;
+&lt;p&gt;However, sometimes you just want to tell Kubernetes &amp;ldquo;give me more pods&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Perhaps you&amp;rsquo;ve built up a backlog somewhere in the system, such as a processing
 queue. The database looks relatively calm and the pods are chugging away, but
 not fast enough. The HPA likely won&amp;rsquo;t kick in, there&amp;rsquo;s not enough work being
-done.&lt;/p></description></item></channel></rss>
+done.&lt;/p&gt;</description></item></channel></rss>
