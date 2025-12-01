@@ -1,7 +1,6 @@
 ---
 title: "Immutable Schemas"
 date: 2025-11-22T18:24:08+00:00
-draft: false
 ---
 
 Representing data in any application is a difficult problem to solve involving

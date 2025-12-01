@@ -1,6 +1,5 @@
 ---
 title: "About Me"
-draft: false
 ---
 
 I'm a software engineer, currently working at Starling Bank as a backend Java

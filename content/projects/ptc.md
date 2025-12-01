@@ -1,7 +1,6 @@
 ---
 title: "ptc: Experimental Python to C Compiler"
 date: 2020-05-09
-draft: false
 tags:
 - rust
 - compiler

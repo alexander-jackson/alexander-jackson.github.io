@@ -1,7 +1,6 @@
 ---
 title: "Blackboards: Warwick Barbell Management"
 date: 2021-03-13
-draft: false
 tags:
 - rust
 - postgresql

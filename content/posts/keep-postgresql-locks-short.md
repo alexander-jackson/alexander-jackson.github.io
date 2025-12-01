@@ -2,7 +2,6 @@
 title: "Keep PostgreSQL Locks Short"
 date: 2025-12-01T14:27:13Z
 showtoc: true
-draft: false
 ---
 
 When dealing with a PostgreSQL database, locks are both a blessing and a curse.
