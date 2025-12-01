@@ -1,5 +1,5 @@
 ---
-title: "Keep Locks Short"
+title: "Keep PostgreSQL Locks Short"
 date: 2025-12-01T14:27:13Z
 draft: false
 ---
@@ -24,7 +24,7 @@ ADD COLUMN closed_at TIMESTAMP WITH TIME ZONE;
 ```sql
 -- second migration
 ALTER TABLE account
-DROP COLUMN changed_at;
+DROP COLUMN last_modified_at;
 ```
 
 Altering a table requires an access exclusive lock on the table, which will
@@ -121,3 +121,25 @@ This goes badly wrong if there's a long running transaction on
 we'll keep holding the access exclusive lock on `something_busy` while we
 continue to poll for the second one, blocking anything that wants to read from
 or write to the table.
+
+In reality, these migrations should be separated out:
+
+```sql
+-- first migration, modify `something_busy`
+...
+      ALTER TABLE something_busy
+      ADD COLUMN ...;
+...
+```
+
+```sql
+-- second migration, modify `something_also_really_busy`
+...
+      ALTER TABLE something_also_really_busy
+      ADD COLUMN ...;
+...
+```
+
+This ensures that the database releases the lock on `something_busy` before
+moving on to perform lock polling on `something_also_really_busy`, keeping the
+locks shorter.
