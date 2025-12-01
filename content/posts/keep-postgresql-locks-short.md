@@ -34,7 +34,9 @@ time.
 
 Unfortunately, this just means we release the lock and then immediately begin
 asking for it. Dropping a column on even a very large table should be a fast
-operation so it's usually a better idea to do both once you have the lock:
+operation (since the database just marks the column as dropped without
+physically removing the data) so it's usually a better idea to do both once you
+have the lock:
 
 ```sql
 -- single migration
@@ -42,7 +44,7 @@ ALTER TABLE account
 ADD COLUMN closed_at TIMESTAMP WITH TIME ZONE;
 
 ALTER TABLE account
-DROP COLUMN changed_at;
+DROP COLUMN last_modified_at;
 ```
 
 Since the first statement acquires the access exclusive lock, the second
@@ -112,7 +114,7 @@ END; $$;
 ```
 
 Here, we poll for an access exclusive lock on `something_busy` and then add a
-column to the table. Once done, we continue on an poll for an access exclusive
+column to the table. Once done, we continue on and poll for an access exclusive
 lock on `something_also_really_busy`. Naively this seems sensible, we want to
 avoid blocking other transactions.
 
@@ -122,7 +124,7 @@ we'll keep holding the access exclusive lock on `something_busy` while we
 continue to poll for the second one, blocking anything that wants to read from
 or write to the table.
 
-In reality, these migrations should be separated out:
+In reality, these migrations should be separated into individual transactions:
 
 ```sql
 -- first migration, modify `something_busy`
