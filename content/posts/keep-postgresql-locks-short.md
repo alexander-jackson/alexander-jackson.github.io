@@ -1,6 +1,7 @@
 ---
 title: "Keep PostgreSQL Locks Short"
 date: 2025-12-01T14:27:13Z
+showtoc: true
 draft: false
 ---
 
