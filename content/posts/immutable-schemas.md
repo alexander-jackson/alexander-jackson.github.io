@@ -202,7 +202,7 @@ When the purchase is settled, we insert a `SETTLED` event:
 ```sql
 INSERT INTO purchase_event (purchase_event_uid, purchase_id, event_type, occurred_at)
 VALUES (
-    'b2c6d7e3-5d4c-5f3a-0g8h-9c7d6e5f4b3c',
+    '0d1d6b08-cdf5-42ef-810d-0bdba31017e2',
     (SELECT id FROM purchase WHERE purchase_uid = 'd3b1ca3e-83b0-432b-81ea-330facdf7f56'),
     'SETTLED',
     '2025-05-04 10:00:12'
@@ -213,23 +213,31 @@ We can continue this for each event in the purchase lifecycle. To get the curren
 status of a purchase, we can query the latest event:
 
 ```sql
-SELECT
+SELECT DISTINCT ON (p.purchase_uid)
     p.purchase_uid,
     p.created_at,
     pe.event_type AS status,
     pe.occurred_at AS status_changed_at
 FROM purchase p
-JOIN LATERAL (
-    SELECT event_type, occurred_at
-    FROM purchase_event
-    WHERE purchase_id = p.id
-    ORDER BY occurred_at DESC
-    LIMIT 1
-) pe ON true
-ORDER BY p.created_at ASC;
+JOIN purchase_event pe ON pe.purchase_id = p.id
+WHERE p.purchase_uid = 'd3b1ca3e-83b0-432b-81ea-330facdf7f56'
+ORDER BY p.purchase_uid, pe.occurred_at DESC;
+```
+
+We can also list all the events for a given purchase:
+
+```sql
+SELECT
+    p.purchase_uid,
+    pe.event_type AS status,
+    pe.occurred_at AS status_changed_at
+FROM purchase p
+JOIN purchase_event pe ON pe.purchase_id = p.id
+WHERE p.purchase_uid = 'd3b1ca3e-83b0-432b-81ea-330facdf7f56'
+ORDER BY pe.occurred_at;
 ```
 
 The benefit of this approach is that we maintain a full history of all the
-changes to a purchase, without losing any information. We can easily measure
-attributes like how long purchases are taking to be delivered, and we can add
-new event types in the future without modifying existing data.
+changes to a purchase, without losing any information. We can easily provide
+metrics like how long purchases are taking to be delivered, and we can add new
+event types in the future without modifying existing data.
