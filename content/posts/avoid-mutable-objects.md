@@ -91,4 +91,66 @@ This signals to the developer that if they see usages of `validatedRequest`,
 they should probably read the implementation of `validateTransaction` as
 there's no guarantee that the details inside might be the same.
 
+## Builders
+
+One place where mutation is acceptable is in builder classes. These are used to
+build up a representation of a more complex object, potentially starting with
+some default values that can be overridden. These are especially useful in
+tests where there may only be one or two fields that are relevant to the
+scenario, allowing you to highlight these to the developer.
+
+An example builder for the `TransactionRequest` object might look as follows:
+
+```java
+// TransactionRequestBuilder.java
+public class TransactionRequestBuilder {
+    private AccountUid accountUid;
+    private Money amount;
+
+    public static TransactionRequestBuilder withDefaults() {
+        return new TransactionRequestBuilder()
+            .withAccountUid(new AccountUid("..."))
+            .withAmount(Money.of(GBP, "5.00"));
+    }
+
+    public withAccountUid(AccountUid accountUid) {
+        this.accountUid = accountUid;
+        return this;
+    }
+
+    public withAmount(Money amount) {
+        this.amount = amount;
+        return this;
+    }
+
+    public TransactionRequest build() {
+        return new TransactionRequest(accountUid, amount);
+    }
+}
+```
+
+`TransactionRequestBuilder` is a mutable object, but it allows us to easily
+build up test scenarios:
+
+```java
+// a transaction request without customisation
+var default = TransactionRequestBuilder.withDefaults().build();
+
+// one with the `amount` changed, but the `accountUid` as the default
+var changedAmount = TransactionRequestBuilder.withDefaults()
+    .withAmount(Money.of(GBP, "3.00"))
+    .build();
+
+// one with both values changed
+var accountUid = new AccountUid();
+var changedBoth = TransactionRequestBuilder.withDefaults()
+    .withAccountUid(accountUid)
+    .withAmount(Money.of(GBP, "3.00"))
+    .build();
+```
+
+These typically make tests easier to understand and the mutable objects are
+short-lived, so they are considered acceptable and an improvement to the code
+in this case.
+
 [immutable-schemas]: /posts/immutable-schemas
