@@ -1,4 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on</title><link>https://alexander-jackson.github.io/posts/</link><description>Recent content in Posts on</description><generator>Hugo -- 0.152.2</generator><language>en-gb</language><lastBuildDate>Mon, 01 Dec 2025 14:27:13 +0000</lastBuildDate><atom:link href="https://alexander-jackson.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Keep PostgreSQL Locks Short</title><link>https://alexander-jackson.github.io/posts/keep-postgresql-locks-short/</link><pubDate>Mon, 01 Dec 2025 14:27:13 +0000</pubDate><guid>https://alexander-jackson.github.io/posts/keep-postgresql-locks-short/</guid><description>&lt;p&gt;When dealing with a PostgreSQL database, locks are both a blessing and a curse.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on</title><link>https://alexander-jackson.github.io/posts/</link><description>Recent content in Posts on</description><generator>Hugo -- 0.152.2</generator><language>en-gb</language><lastBuildDate>Fri, 05 Dec 2025 21:25:28 +0000</lastBuildDate><atom:link href="https://alexander-jackson.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Avoid Mutable Objects</title><link>https://alexander-jackson.github.io/posts/avoid-mutable-objects/</link><pubDate>Fri, 05 Dec 2025 21:25:28 +0000</pubDate><guid>https://alexander-jackson.github.io/posts/avoid-mutable-objects/</guid><description>&lt;p&gt;In software engineering, you&amp;rsquo;ll hear a lot about immutability of data and the
+benefits this can provide. I&amp;rsquo;ve already written about this at &lt;a href="https://alexander-jackson.github.io/posts/immutable-schemas"&gt;the database
+level&lt;/a&gt;, but it&amp;rsquo;s also worth discussing it in terms of plain
+Java code.&lt;/p&gt;
+&lt;h2 id="the-problem"&gt;The Problem&lt;/h2&gt;
+&lt;p&gt;Consider the following piece of code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// TransactionRequest.java&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;TransactionRequest&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;final&lt;/span&gt; AccountUid accountUid;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;private&lt;/span&gt; Money amount;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;TransactionRequest&lt;/span&gt;(AccountUid accountUid, Money amount) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;accountUid&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; accountUid;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;amount&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; amount;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// standard getters...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;setAmount&lt;/span&gt;(Money amount) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;this&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;amount&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; amount;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// TransactionService.java&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;processDefaultDonation&lt;/span&gt;(AccountUid accountUid) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; request &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;new&lt;/span&gt; TransactionRequest(accountUid, Money.&lt;span style="color:#a6e22e"&gt;of&lt;/span&gt;(GBP, &lt;span style="color:#e6db74"&gt;&amp;#34;5.00&amp;#34;&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; validateTransaction(request);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// do more things here, using `request`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As a software engineer reading this code, we can see when the transaction gets
+created and we know that the amount is going to be £5. We then pass the request
+into the validation function.&lt;/p&gt;</description></item><item><title>Keep PostgreSQL Locks Short</title><link>https://alexander-jackson.github.io/posts/keep-postgresql-locks-short/</link><pubDate>Mon, 01 Dec 2025 14:27:13 +0000</pubDate><guid>https://alexander-jackson.github.io/posts/keep-postgresql-locks-short/</guid><description>&lt;p&gt;When dealing with a PostgreSQL database, locks are both a blessing and a curse.
 Most of the time they get out of your way, coordinating transactions to make
 sure they happen in the order you would expect and preventing concurrent data
 updates.&lt;/p&gt;
