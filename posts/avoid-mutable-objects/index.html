@@ -4,130 +4,130 @@ level, but it&rsquo;s also worth discussing it in terms of plain
 Java code.
 The Problem
 Consider the following piece of code:
-// TransactionRequest.java
-public class TransactionRequest {
+// DonationRequest.java
+public class DonationRequest {
     private final AccountUid accountUid;
-    private Money amount;
+    private BigDecimal amount;
 
-    public TransactionRequest(AccountUid accountUid, Money amount) {
+    public DonationRequest(AccountUid accountUid, BigDecimal amount) {
         this.accountUid = accountUid;
         this.amount = amount;
     }
 
     // standard getters...
 
-    public void setAmount(Money amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }
 
-// TransactionService.java
+// DonationService.java
 public void processDefaultDonation(AccountUid accountUid) {
-    var request = new TransactionRequest(accountUid, Money.of(GBP, "5.00"));
+    var request = new DonationRequest(accountUid, new BigDecimal("5.00"));
 
-    validateTransaction(request);
+    validateDonation(request);
 
     // do more things here, using `request`
 }
-As a software engineer reading this code, we can see when the transaction gets
+As a software engineer reading this code, we can see when the donation gets
 created and we know that the amount is going to be £5. We then pass the request
 into the validation function.'><meta name=author content><link rel=canonical href=https://alexander-jackson.github.io/posts/avoid-mutable-objects/><link crossorigin=anonymous href=/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF+13Dyqob6ASlTrTye8=" rel="preload stylesheet" as=style><link rel=icon href=https://alexander-jackson.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://alexander-jackson.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://alexander-jackson.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://alexander-jackson.github.io/apple-touch-icon.png><link rel=mask-icon href=https://alexander-jackson.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://alexander-jackson.github.io/posts/avoid-mutable-objects/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:url" content="https://alexander-jackson.github.io/posts/avoid-mutable-objects/"><meta property="og:title" content="Avoid Mutable Objects"><meta property="og:description" content='In software engineering, you’ll hear a lot about immutability of data and the benefits this can provide. I’ve already written about this at the database level, but it’s also worth discussing it in terms of plain Java code.
 The Problem Consider the following piece of code:
-// TransactionRequest.java public class TransactionRequest { private final AccountUid accountUid; private Money amount; public TransactionRequest(AccountUid accountUid, Money amount) { this.accountUid = accountUid; this.amount = amount; } // standard getters... public void setAmount(Money amount) { this.amount = amount; } } // TransactionService.java public void processDefaultDonation(AccountUid accountUid) { var request = new TransactionRequest(accountUid, Money.of(GBP, "5.00")); validateTransaction(request); // do more things here, using `request` } As a software engineer reading this code, we can see when the transaction gets created and we know that the amount is going to be £5. We then pass the request into the validation function.'><meta property="og:locale" content="en-gb"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-12-05T21:25:28+00:00"><meta property="article:modified_time" content="2025-12-05T21:25:28+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Avoid Mutable Objects"><meta name=twitter:description content='In software engineering, you&rsquo;ll hear a lot about immutability of data and the
+// DonationRequest.java public class DonationRequest { private final AccountUid accountUid; private BigDecimal amount; public DonationRequest(AccountUid accountUid, BigDecimal amount) { this.accountUid = accountUid; this.amount = amount; } // standard getters... public void setAmount(BigDecimal amount) { this.amount = amount; } } // DonationService.java public void processDefaultDonation(AccountUid accountUid) { var request = new DonationRequest(accountUid, new BigDecimal("5.00")); validateDonation(request); // do more things here, using `request` } As a software engineer reading this code, we can see when the donation gets created and we know that the amount is going to be £5. We then pass the request into the validation function.'><meta property="og:locale" content="en-gb"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-12-05T21:25:28+00:00"><meta property="article:modified_time" content="2025-12-05T21:25:28+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Avoid Mutable Objects"><meta name=twitter:description content='In software engineering, you&rsquo;ll hear a lot about immutability of data and the
 benefits this can provide. I&rsquo;ve already written about this at the database
 level, but it&rsquo;s also worth discussing it in terms of plain
 Java code.
 The Problem
 Consider the following piece of code:
-// TransactionRequest.java
-public class TransactionRequest {
+// DonationRequest.java
+public class DonationRequest {
     private final AccountUid accountUid;
-    private Money amount;
+    private BigDecimal amount;
 
-    public TransactionRequest(AccountUid accountUid, Money amount) {
+    public DonationRequest(AccountUid accountUid, BigDecimal amount) {
         this.accountUid = accountUid;
         this.amount = amount;
     }
 
     // standard getters...
 
-    public void setAmount(Money amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }
 
-// TransactionService.java
+// DonationService.java
 public void processDefaultDonation(AccountUid accountUid) {
-    var request = new TransactionRequest(accountUid, Money.of(GBP, "5.00"));
+    var request = new DonationRequest(accountUid, new BigDecimal("5.00"));
 
-    validateTransaction(request);
+    validateDonation(request);
 
     // do more things here, using `request`
 }
-As a software engineer reading this code, we can see when the transaction gets
+As a software engineer reading this code, we can see when the donation gets
 created and we know that the amount is going to be £5. We then pass the request
-into the validation function.'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://alexander-jackson.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Avoid Mutable Objects","item":"https://alexander-jackson.github.io/posts/avoid-mutable-objects/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Avoid Mutable Objects","name":"Avoid Mutable Objects","description":"In software engineering, you\u0026rsquo;ll hear a lot about immutability of data and the benefits this can provide. I\u0026rsquo;ve already written about this at the database level, but it\u0026rsquo;s also worth discussing it in terms of plain Java code.\nThe Problem Consider the following piece of code:\n// TransactionRequest.java public class TransactionRequest { private final AccountUid accountUid; private Money amount; public TransactionRequest(AccountUid accountUid, Money amount) { this.accountUid = accountUid; this.amount = amount; } // standard getters... public void setAmount(Money amount) { this.amount = amount; } } // TransactionService.java public void processDefaultDonation(AccountUid accountUid) { var request = new TransactionRequest(accountUid, Money.of(GBP, \u0026#34;5.00\u0026#34;)); validateTransaction(request); // do more things here, using `request` } As a software engineer reading this code, we can see when the transaction gets created and we know that the amount is going to be £5. We then pass the request into the validation function.\n","keywords":[],"articleBody":"In software engineering, you’ll hear a lot about immutability of data and the benefits this can provide. I’ve already written about this at the database level, but it’s also worth discussing it in terms of plain Java code.\nThe Problem Consider the following piece of code:\n// TransactionRequest.java public class TransactionRequest { private final AccountUid accountUid; private Money amount; public TransactionRequest(AccountUid accountUid, Money amount) { this.accountUid = accountUid; this.amount = amount; } // standard getters... public void setAmount(Money amount) { this.amount = amount; } } // TransactionService.java public void processDefaultDonation(AccountUid accountUid) { var request = new TransactionRequest(accountUid, Money.of(GBP, \"5.00\")); validateTransaction(request); // do more things here, using `request` } As a software engineer reading this code, we can see when the transaction gets created and we know that the amount is going to be £5. We then pass the request into the validation function.\nWithout looking into the content of that method, we can’t guarantee what the amount would be afterwards. It could leave the request untouched, it could also use the setAmount method to reduce the amount if it decided it was too high. Perhaps it could have logic to cap the donation amount based on the amount in the account, we don’t know. Here are two possible definitions:\n// performs no mutations public void validateTransaction(TransactionRequest request) { if (request.getAmount().isZero()) { throw new IllegalArgumentException(\"transactions cannot have a zero amount\"); } } // caps the amount public void validateTransaction(TransactionRequest request) { Money amount = request.getAmount(); Money limit = Money.of(amount.getCurrency(), \"3.00\"); if (amount.isGreaterThan(limit)) { request.setAmount(limit); } } This makes the code more difficult to reason about. If the request was immutable, we could avoid reading the implementation of validateTransaction as we’d know the object was exactly the same as when it was created.\nAdditionally, this problem propagates further into the code. If validateTransaction called another method, we’d have to read further into the usages to understand if the object could be mutated. As a result, we have to read every line of code instead of being able to ignore large parts of it.\nThe Solution Instead, we should prefer immutable objects. TransactionRequest should be defined as:\n// TransactionRequest.java public class TransactionRequest { private final AccountUid accountUid; private final Money amount; // standard constructor... // standard getters... } This means that once the fields have been set in the constructor, we know they cannot possibly change. An alteration to the amount would need to create a new object:\npublic void processDefaultDonation(AccountUid accountUid) { var request = new TransactionRequest(accountUid, Money.of(GBP, \"5.00\")); var validatedRequest = validateTransaction(request); // do more things here, using `validatedRequest` instead } This signals to the developer that if they see usages of validatedRequest, they should probably read the implementation of validateTransaction as there’s no guarantee that the details inside might be the same.\nBuilders One place where mutation is acceptable is in builder classes. These are used to build up a representation of a more complex object, potentially starting with some default values that can be overridden. These are especially useful in tests where there may only be one or two fields that are relevant to the scenario, allowing you to highlight these to the developer.\nAn example builder for the TransactionRequest object might look as follows:\n// TransactionRequestBuilder.java public class TransactionRequestBuilder { private AccountUid accountUid; private Money amount; public static TransactionRequestBuilder withDefaults() { return new TransactionRequestBuilder() .withAccountUid(new AccountUid(\"...\")) .withAmount(Money.of(GBP, \"5.00\")); } public withAccountUid(AccountUid accountUid) { this.accountUid = accountUid; return this; } public withAmount(Money amount) { this.amount = amount; return this; } public TransactionRequest build() { return new TransactionRequest(accountUid, amount); } } TransactionRequestBuilder is a mutable object, but it allows us to easily build up test scenarios:\n// a transaction request without customisation var default = TransactionRequestBuilder.withDefaults().build(); // one with the `amount` changed, but the `accountUid` as the default var changedAmount = TransactionRequestBuilder.withDefaults() .withAmount(Money.of(GBP, \"3.00\")) .build(); // one with both values changed var accountUid = new AccountUid(); var changedBoth = TransactionRequestBuilder.withDefaults() .withAccountUid(accountUid) .withAmount(Money.of(GBP, \"3.00\")) .build(); These typically make tests easier to understand and the mutable objects are short-lived, so they are considered acceptable and an improvement to the code in this case.\n","wordCount":"681","inLanguage":"en","datePublished":"2025-12-05T21:25:28Z","dateModified":"2025-12-05T21:25:28Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://alexander-jackson.github.io/posts/avoid-mutable-objects/"},"publisher":{"@type":"Organization","name":"","logo":{"@type":"ImageObject","url":"https://alexander-jackson.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+into the validation function.'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://alexander-jackson.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Avoid Mutable Objects","item":"https://alexander-jackson.github.io/posts/avoid-mutable-objects/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Avoid Mutable Objects","name":"Avoid Mutable Objects","description":"In software engineering, you\u0026rsquo;ll hear a lot about immutability of data and the benefits this can provide. I\u0026rsquo;ve already written about this at the database level, but it\u0026rsquo;s also worth discussing it in terms of plain Java code.\nThe Problem Consider the following piece of code:\n// DonationRequest.java public class DonationRequest { private final AccountUid accountUid; private BigDecimal amount; public DonationRequest(AccountUid accountUid, BigDecimal amount) { this.accountUid = accountUid; this.amount = amount; } // standard getters... public void setAmount(BigDecimal amount) { this.amount = amount; } } // DonationService.java public void processDefaultDonation(AccountUid accountUid) { var request = new DonationRequest(accountUid, new BigDecimal(\u0026#34;5.00\u0026#34;)); validateDonation(request); // do more things here, using `request` } As a software engineer reading this code, we can see when the donation gets created and we know that the amount is going to be £5. We then pass the request into the validation function.\n","keywords":[],"articleBody":"In software engineering, you’ll hear a lot about immutability of data and the benefits this can provide. I’ve already written about this at the database level, but it’s also worth discussing it in terms of plain Java code.\nThe Problem Consider the following piece of code:\n// DonationRequest.java public class DonationRequest { private final AccountUid accountUid; private BigDecimal amount; public DonationRequest(AccountUid accountUid, BigDecimal amount) { this.accountUid = accountUid; this.amount = amount; } // standard getters... public void setAmount(BigDecimal amount) { this.amount = amount; } } // DonationService.java public void processDefaultDonation(AccountUid accountUid) { var request = new DonationRequest(accountUid, new BigDecimal(\"5.00\")); validateDonation(request); // do more things here, using `request` } As a software engineer reading this code, we can see when the donation gets created and we know that the amount is going to be £5. We then pass the request into the validation function.\nWithout looking into the content of that method, we can’t guarantee what the amount would be afterwards. It could leave the request untouched, it could also use the setAmount method to reduce the amount if it decided it was too high. Perhaps it could have logic to cap the donation amount based on the amount in the account, we don’t know. Here are two possible definitions:\n// performs no mutations public void validateDonation(DonationRequest request) { if (request.getAmount().isZero()) { throw new IllegalArgumentException(\"donations cannot have a zero amount\"); } } // caps the amount public void validateDonation(DonationRequest request) { BigDecimal amount = request.getAmount(); BigDecimal limit = new BigDecimal(\"3.00\"); if (amount.isGreaterThan(limit)) { request.setAmount(limit); } } This makes the code more difficult to reason about. If the request was immutable, we could avoid reading the implementation of validateDonation as we’d know the object was exactly the same as when it was created.\nAdditionally, this problem propagates further into the code. If validateDonation called another method, we’d have to read further into the usages to understand if the object could be mutated. As a result, we have to read every line of code instead of being able to ignore large parts of it.\nThe Solution Instead, we should prefer immutable objects. DonationRequest should be defined as:\n// DonationRequest.java public class DonationRequest { private final AccountUid accountUid; private final BigDecimal amount; // standard constructor... // standard getters... } This means that once the fields have been set in the constructor, we know they cannot possibly change. An alteration to the amount would need to create a new object:\npublic void processDefaultDonation(AccountUid accountUid) { var request = new DonationRequest(accountUid, new BigDecimal(\"5.00\")); var validatedDonation = validateDonation(request); // do more things here, using `validatedDonation` instead } This signals to the developer that if they see usages of validatedDonation, they should probably read the implementation of validateDonation as there’s no guarantee that the details inside might be the same.\nBuilders One place where mutation is acceptable is in builder classes. These are used to build up a representation of a more complex object, potentially starting with some default values that can be overridden. These are especially useful in tests where there may only be one or two fields that are relevant to the scenario, allowing you to highlight these to the developer.\nAn example builder for the DonationRequest object might look as follows:\n// DonationRequestBuilder.java public class DonationRequestBuilder { private AccountUid accountUid; private BigDecimal amount; public static DonationRequestBuilder withDefaults() { return new DonationRequestBuilder() .withAccountUid(new AccountUid(\"...\")) .withAmount(new BigDecimal(\"5.00\")); } public withAccountUid(AccountUid accountUid) { this.accountUid = accountUid; return this; } public withAmount(BigDecimal amount) { this.amount = amount; return this; } public DonationRequest build() { return new DonationRequest(accountUid, amount); } } DonationRequestBuilder is a mutable object, but it allows us to easily build up test scenarios:\n// a transaction request without customisation var default = DonationRequestBuilder.withDefaults().build(); // one with the `amount` changed, but the `accountUid` as the default var changedAmount = DonationRequestBuilder.withDefaults() .withAmount(new BigDecimal(\"3.00\")) .build(); // one with both values changed var accountUid = new AccountUid(); var changedBoth = DonationRequestBuilder.withDefaults() .withAccountUid(accountUid) .withAmount(new BigDecimal(\"3.00\")) .build(); These typically make tests easier to understand and the mutable objects are short-lived, so they are considered acceptable and an improvement to the code in this case.\n","wordCount":"681","inLanguage":"en","datePublished":"2025-12-05T21:25:28Z","dateModified":"2025-12-05T21:25:28Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://alexander-jackson.github.io/posts/avoid-mutable-objects/"},"publisher":{"@type":"Organization","name":"","logo":{"@type":"ImageObject","url":"https://alexander-jackson.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
 <svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
 <svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu></ul></nav></header><main class=main><article class=post-single><header class=post-header><h1 class="post-title entry-hint-parent">Avoid Mutable Objects</h1><div class=post-meta><span title='2025-12-05 21:25:28 +0000 UTC'>December 5, 2025</span></div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#the-problem aria-label="The Problem">The Problem</a></li><li><a href=#the-solution aria-label="The Solution">The Solution</a></li><li><a href=#builders aria-label=Builders>Builders</a></li></ul></div></details></div><div class=post-content><p>In software engineering, you&rsquo;ll hear a lot about immutability of data and the
 benefits this can provide. I&rsquo;ve already written about this at <a href=/posts/immutable-schemas>the database
 level</a>, but it&rsquo;s also worth discussing it in terms of plain
-Java code.</p><h2 id=the-problem>The Problem<a hidden class=anchor aria-hidden=true href=#the-problem>#</a></h2><p>Consider the following piece of code:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TransactionRequest.java</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TransactionRequest</span> {
+Java code.</p><h2 id=the-problem>The Problem<a hidden class=anchor aria-hidden=true href=#the-problem>#</a></h2><p>Consider the following piece of code:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// DonationRequest.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DonationRequest</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> AccountUid accountUid;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Money amount;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> BigDecimal amount;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>TransactionRequest</span>(AccountUid accountUid, Money amount) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>DonationRequest</span>(AccountUid accountUid, BigDecimal amount) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>accountUid</span> <span style=color:#f92672>=</span> accountUid;
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>amount</span> <span style=color:#f92672>=</span> amount;
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// standard getters...</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setAmount</span>(Money amount) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setAmount</span>(BigDecimal amount) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>amount</span> <span style=color:#f92672>=</span> amount;
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// TransactionService.java</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// DonationService.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>processDefaultDonation</span>(AccountUid accountUid) {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> request <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TransactionRequest(accountUid, Money.<span style=color:#a6e22e>of</span>(GBP, <span style=color:#e6db74>&#34;5.00&#34;</span>));
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> request <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DonationRequest(accountUid, <span style=color:#66d9ef>new</span> BigDecimal(<span style=color:#e6db74>&#34;5.00&#34;</span>));
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    validateTransaction(request);
+</span></span><span style=display:flex><span>    validateDonation(request);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// do more things here, using `request`</span>
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>As a software engineer reading this code, we can see when the transaction gets
+</span></span></code></pre></div><p>As a software engineer reading this code, we can see when the donation gets
 created and we know that the amount is going to be £5. We then pass the request
 into the validation function.</p><p>Without looking into the content of that method, we can&rsquo;t guarantee what the
 amount would be afterwards. It could leave the request untouched, it could also
 use the <code>setAmount</code> method to reduce the amount if it decided it was too high.
 Perhaps it could have logic to cap the donation amount based on the amount in
 the account, we don&rsquo;t know. Here are two possible definitions:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// performs no mutations</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>validateTransaction</span>(TransactionRequest request) {
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>validateDonation</span>(DonationRequest request) {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (request.<span style=color:#a6e22e>getAmount</span>().<span style=color:#a6e22e>isZero</span>()) {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException(<span style=color:#e6db74>&#34;transactions cannot have a zero amount&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException(<span style=color:#e6db74>&#34;donations cannot have a zero amount&#34;</span>);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>// caps the amount</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>validateTransaction</span>(TransactionRequest request) {
-</span></span><span style=display:flex><span>    Money amount <span style=color:#f92672>=</span> request.<span style=color:#a6e22e>getAmount</span>();
-</span></span><span style=display:flex><span>    Money limit <span style=color:#f92672>=</span> Money.<span style=color:#a6e22e>of</span>(amount.<span style=color:#a6e22e>getCurrency</span>(), <span style=color:#e6db74>&#34;3.00&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>validateDonation</span>(DonationRequest request) {
+</span></span><span style=display:flex><span>    BigDecimal amount <span style=color:#f92672>=</span> request.<span style=color:#a6e22e>getAmount</span>();
+</span></span><span style=display:flex><span>    BigDecimal limit <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> BigDecimal(<span style=color:#e6db74>&#34;3.00&#34;</span>);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (amount.<span style=color:#a6e22e>isGreaterThan</span>(limit)) {
 </span></span><span style=display:flex><span>        request.<span style=color:#a6e22e>setAmount</span>(limit);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>This makes the code more difficult to reason about. If the request was
-immutable, we could avoid reading the implementation of <code>validateTransaction</code>
-as we&rsquo;d know the object was exactly the same as when it was created.</p><p>Additionally, this problem propagates further into the code. If
-<code>validateTransaction</code> called another method, we&rsquo;d have to read further into the
+immutable, we could avoid reading the implementation of <code>validateDonation</code> as
+we&rsquo;d know the object was exactly the same as when it was created.</p><p>Additionally, this problem propagates further into the code. If
+<code>validateDonation</code> called another method, we&rsquo;d have to read further into the
 usages to understand if the object could be mutated. As a result, we have to
-read every line of code instead of being able to ignore large parts of it.</p><h2 id=the-solution>The Solution<a hidden class=anchor aria-hidden=true href=#the-solution>#</a></h2><p>Instead, we should prefer immutable objects. <code>TransactionRequest</code> should be
-defined as:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TransactionRequest.java</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TransactionRequest</span> {
+read every line of code instead of being able to ignore large parts of it.</p><h2 id=the-solution>The Solution<a hidden class=anchor aria-hidden=true href=#the-solution>#</a></h2><p>Instead, we should prefer immutable objects. <code>DonationRequest</code> should be
+defined as:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// DonationRequest.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DonationRequest</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> AccountUid accountUid;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Money amount;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> BigDecimal amount;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// standard constructor...</span>
 </span></span><span style=display:flex><span>
@@ -136,26 +136,26 @@ defined as:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;backgrou
 </span></span></code></pre></div><p>This means that once the fields have been set in the constructor, we know they
 cannot possibly change. An alteration to the amount would need to create a new
 object:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>processDefaultDonation</span>(AccountUid accountUid) {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> request <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TransactionRequest(accountUid, Money.<span style=color:#a6e22e>of</span>(GBP, <span style=color:#e6db74>&#34;5.00&#34;</span>));
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> validatedRequest <span style=color:#f92672>=</span> validateTransaction(request);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> request <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DonationRequest(accountUid, <span style=color:#66d9ef>new</span> BigDecimal(<span style=color:#e6db74>&#34;5.00&#34;</span>));
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> validatedDonation <span style=color:#f92672>=</span> validateDonation(request);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#75715e>// do more things here, using `validatedRequest` instead</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// do more things here, using `validatedDonation` instead</span>
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>This signals to the developer that if they see usages of <code>validatedRequest</code>,
-they should probably read the implementation of <code>validateTransaction</code> as
-there&rsquo;s no guarantee that the details inside might be the same.</p><h2 id=builders>Builders<a hidden class=anchor aria-hidden=true href=#builders>#</a></h2><p>One place where mutation is acceptable is in builder classes. These are used to
+</span></span></code></pre></div><p>This signals to the developer that if they see usages of <code>validatedDonation</code>,
+they should probably read the implementation of <code>validateDonation</code> as there&rsquo;s
+no guarantee that the details inside might be the same.</p><h2 id=builders>Builders<a hidden class=anchor aria-hidden=true href=#builders>#</a></h2><p>One place where mutation is acceptable is in builder classes. These are used to
 build up a representation of a more complex object, potentially starting with
 some default values that can be overridden. These are especially useful in
 tests where there may only be one or two fields that are relevant to the
-scenario, allowing you to highlight these to the developer.</p><p>An example builder for the <code>TransactionRequest</code> object might look as follows:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TransactionRequestBuilder.java</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TransactionRequestBuilder</span> {
+scenario, allowing you to highlight these to the developer.</p><p>An example builder for the <code>DonationRequest</code> object might look as follows:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// DonationRequestBuilder.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DonationRequestBuilder</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> AccountUid accountUid;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Money amount;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> BigDecimal amount;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> TransactionRequestBuilder <span style=color:#a6e22e>withDefaults</span>() {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> TransactionRequestBuilder()
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> DonationRequestBuilder <span style=color:#a6e22e>withDefaults</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> DonationRequestBuilder()
 </span></span><span style=display:flex><span>            .<span style=color:#a6e22e>withAccountUid</span>(<span style=color:#66d9ef>new</span> AccountUid(<span style=color:#e6db74>&#34;...&#34;</span>))
-</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>withAmount</span>(Money.<span style=color:#a6e22e>of</span>(GBP, <span style=color:#e6db74>&#34;5.00&#34;</span>));
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>withAmount</span>(<span style=color:#66d9ef>new</span> BigDecimal(<span style=color:#e6db74>&#34;5.00&#34;</span>));
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>withAccountUid</span>(AccountUid accountUid) {
@@ -163,29 +163,29 @@ scenario, allowing you to highlight these to the developer.</p><p>An example bui
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>;
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>withAmount</span>(Money amount) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>withAmount</span>(BigDecimal amount) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>amount</span> <span style=color:#f92672>=</span> amount;
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>;
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> TransactionRequest <span style=color:#a6e22e>build</span>() {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> TransactionRequest(accountUid, amount);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> DonationRequest <span style=color:#a6e22e>build</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> DonationRequest(accountUid, amount);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p><code>TransactionRequestBuilder</code> is a mutable object, but it allows us to easily
-build up test scenarios:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// a transaction request without customisation</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> default <span style=color:#f92672>=</span> TransactionRequestBuilder.<span style=color:#a6e22e>withDefaults</span>().<span style=color:#a6e22e>build</span>();
+</span></span></code></pre></div><p><code>DonationRequestBuilder</code> is a mutable object, but it allows us to easily build
+up test scenarios:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// a transaction request without customisation</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> default <span style=color:#f92672>=</span> DonationRequestBuilder.<span style=color:#a6e22e>withDefaults</span>().<span style=color:#a6e22e>build</span>();
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>// one with the `amount` changed, but the `accountUid` as the default</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> changedAmount <span style=color:#f92672>=</span> TransactionRequestBuilder.<span style=color:#a6e22e>withDefaults</span>()
-</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>withAmount</span>(Money.<span style=color:#a6e22e>of</span>(GBP, <span style=color:#e6db74>&#34;3.00&#34;</span>))
+</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> changedAmount <span style=color:#f92672>=</span> DonationRequestBuilder.<span style=color:#a6e22e>withDefaults</span>()
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>withAmount</span>(<span style=color:#66d9ef>new</span> BigDecimal(<span style=color:#e6db74>&#34;3.00&#34;</span>))
 </span></span><span style=display:flex><span>    .<span style=color:#a6e22e>build</span>();
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>// one with both values changed</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> accountUid <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AccountUid();
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> changedBoth <span style=color:#f92672>=</span> TransactionRequestBuilder.<span style=color:#a6e22e>withDefaults</span>()
+</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> changedBoth <span style=color:#f92672>=</span> DonationRequestBuilder.<span style=color:#a6e22e>withDefaults</span>()
 </span></span><span style=display:flex><span>    .<span style=color:#a6e22e>withAccountUid</span>(accountUid)
-</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>withAmount</span>(Money.<span style=color:#a6e22e>of</span>(GBP, <span style=color:#e6db74>&#34;3.00&#34;</span>))
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>withAmount</span>(<span style=color:#66d9ef>new</span> BigDecimal(<span style=color:#e6db74>&#34;3.00&#34;</span>))
 </span></span><span style=display:flex><span>    .<span style=color:#a6e22e>build</span>();
 </span></span></code></pre></div><p>These typically make tests easier to understand and the mutable objects are
 short-lived, so they are considered acceptable and an improvement to the code
