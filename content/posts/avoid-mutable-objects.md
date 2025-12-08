@@ -18,23 +18,23 @@ Consider the following piece of code:
 // TransactionRequest.java
 public class TransactionRequest {
     private final AccountUid accountUid;
-    private Money amount;
+    private BigDecimal amount;
 
-    public TransactionRequest(AccountUid accountUid, Money amount) {
+    public TransactionRequest(AccountUid accountUid, BigDecimal amount) {
         this.accountUid = accountUid;
         this.amount = amount;
     }
 
     // standard getters...
 
-    public void setAmount(Money amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }
 
 // TransactionService.java
 public void processDefaultDonation(AccountUid accountUid) {
-    var request = new TransactionRequest(accountUid, Money.of(GBP, "5.00"));
+    var request = new TransactionRequest(accountUid, new BigDecimal("5.00"));
 
     validateTransaction(request);
 
@@ -62,8 +62,8 @@ public void validateTransaction(TransactionRequest request) {
 
 // caps the amount
 public void validateTransaction(TransactionRequest request) {
-    Money amount = request.getAmount();
-    Money limit = Money.of(amount.getCurrency(), "3.00");
+    BigDecimal amount = request.getAmount();
+    BigDecimal limit = new BigDecimal("3.00");
 
     if (amount.isGreaterThan(limit)) {
         request.setAmount(limit);
@@ -89,7 +89,7 @@ defined as:
 // TransactionRequest.java
 public class TransactionRequest {
     private final AccountUid accountUid;
-    private final Money amount;
+    private final BigDecimal amount;
 
     // standard constructor...
 
@@ -103,7 +103,7 @@ object:
 
 ```java
 public void processDefaultDonation(AccountUid accountUid) {
-    var request = new TransactionRequest(accountUid, Money.of(GBP, "5.00"));
+    var request = new TransactionRequest(accountUid, new BigDecimal("5.00"));
     var validatedRequest = validateTransaction(request);
 
     // do more things here, using `validatedRequest` instead
@@ -128,12 +128,12 @@ An example builder for the `TransactionRequest` object might look as follows:
 // TransactionRequestBuilder.java
 public class TransactionRequestBuilder {
     private AccountUid accountUid;
-    private Money amount;
+    private BigDecimal amount;
 
     public static TransactionRequestBuilder withDefaults() {
         return new TransactionRequestBuilder()
             .withAccountUid(new AccountUid("..."))
-            .withAmount(Money.of(GBP, "5.00"));
+            .withAmount(new BigDecimal("5.00"));
     }
 
     public withAccountUid(AccountUid accountUid) {
@@ -141,7 +141,7 @@ public class TransactionRequestBuilder {
         return this;
     }
 
-    public withAmount(Money amount) {
+    public withAmount(BigDecimal amount) {
         this.amount = amount;
         return this;
     }
@@ -161,14 +161,14 @@ var default = TransactionRequestBuilder.withDefaults().build();
 
 // one with the `amount` changed, but the `accountUid` as the default
 var changedAmount = TransactionRequestBuilder.withDefaults()
-    .withAmount(Money.of(GBP, "3.00"))
+    .withAmount(new BigDecimal("3.00"))
     .build();
 
 // one with both values changed
 var accountUid = new AccountUid();
 var changedBoth = TransactionRequestBuilder.withDefaults()
     .withAccountUid(accountUid)
-    .withAmount(Money.of(GBP, "3.00"))
+    .withAmount(new BigDecimal("3.00"))
     .build();
 ```
 
