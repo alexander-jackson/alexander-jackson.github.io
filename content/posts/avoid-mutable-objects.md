@@ -50,12 +50,35 @@ Without looking into the content of that method, we can't guarantee what the
 amount would be afterwards. It could leave the request untouched, it could also
 use the `setAmount` method to reduce the amount if it decided it was too high.
 Perhaps it could have logic to cap the donation amount based on the amount in
-the account, we don't know.
+the account, we don't know. Here are two possible definitions:
 
-The point is that this makes the code more difficult to reason about. If the
-request was immutable, we could avoid reading the implementation of
-`validateTransaction` as we'd know the object was exactly the same as when it
-was created.
+```java
+// performs no mutations
+public void validateTransaction(TransactionRequest request) {
+    if (request.getAmount().isZero()) {
+        throw new IllegalArgumentException("transactions cannot have a zero amount");
+    }
+}
+
+// caps the amount
+public void validateTransaction(TransactionRequest request) {
+    Money amount = request.getAmount();
+    Money limit = Money.of(amount.getCurrency(), "3.00");
+
+    if (amount.isGreaterThan(limit)) {
+        request.setAmount(limit);
+    }
+}
+```
+
+This makes the code more difficult to reason about. If the request was
+immutable, we could avoid reading the implementation of `validateTransaction`
+as we'd know the object was exactly the same as when it was created.
+
+Additionally, this problem propagates further into the code. If
+`validateTransaction` called another method, we'd have to read further into the
+usages to understand if the object could be mutated. As a result, we have to
+read every line of code instead of being able to ignore large parts of it.
 
 ## The Solution
 
