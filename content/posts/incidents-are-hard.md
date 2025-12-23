@@ -23,8 +23,9 @@ considering a system which is entirely logical. Plenty of simple incidents have
 been worsened by stressed engineers making rash decisions.
 
 As you trawl through logs and metrics, or find yourself on the cusp of making
-an important decision, try and consider what you would do outside of an
-incident scenario.
+an important decision, try and consider what approach you would take if time
+didn't matter. Take 30 seconds to write down what you know or chat with another
+engineer before jumping to conclusions.
 
 No matter how the situation feels at the time, remind yourself that larger
 companies have had worse incidents with significantly more impact and survived.
@@ -43,11 +44,16 @@ groups to focus. It becomes confusing when the conversation jumps between some
 traces that have just been discovered and a potential mitigation plan, leaving
 neither group time to discuss.
 
-In larger incidents separate breakout calls can be useful for this, however
-they increase the cost of communication between the two groups to evaluate
-progress as it moves from synchronous to asynchronous. Another option is for
-engineers to switch calls, but this risks them losing context of their area or
-joining halfway through discussions.
+In larger incidents, separate breakout calls for each stream can be useful for
+this. This unfortunately comes at a cost of communication between the two
+groups, as it moves from synchronous to asynchronous. Engineers in the
+mitigation strategy call may need to understand more of the impact discovered
+in the other call to make decisions.
+
+Another option is for engineers to switch calls, but this risks them losing
+context of their area or joining halfway through discussions. Having a strong
+scribe in each call reduces this overhead, as information is regularly
+summarised into a common location for both groups to read.
 
 ## Commanding the incident
 
@@ -70,7 +76,7 @@ Again, none of this requires domain knowledge. It just needs someone to get in
 there and have the confidence to make decisions.
 
 Separating out the participants into different groups also allows them to work
-in parallel. you might find that a rollback isn't possible but at least you
+in parallel. You might find that a rollback isn't possible but at least you
 were ready to go if the option presented itself. You might discover that the
 customer impact is less than expected, but having the revert build through
 earlier is always useful.
