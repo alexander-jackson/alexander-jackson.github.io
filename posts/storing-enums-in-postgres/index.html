@@ -44,7 +44,7 @@ match the enum:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;back
 </span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>FROM</span> account;
 </span></span><span style=display:flex><span> id <span style=color:#f92672>|</span> <span style=color:#66d9ef>state</span>
 </span></span><span style=display:flex><span><span style=color:#75715e>----+-------
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> OPENED
+</span></span></span><span style=display:flex><span>  <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> OPENED
 </span></span><span style=display:flex><span>(<span style=color:#ae81ff>1</span> <span style=color:#66d9ef>row</span>)
 </span></span></code></pre></div><p>We can easily add new variants to the definition if we decide that we want to
 represent the state of an account before it gets approved:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TYPE</span> account_state <span style=color:#66d9ef>ADD</span> VALUE <span style=color:#e6db74>&#39;PENDING&#39;</span>;
@@ -54,16 +54,16 @@ whether the variant was used anywhere in the database. Even with an index, that
 could be a very expensive operation requiring locks on many different tables.</p><p>We can try and get around this by creating a new type with our reduced variant
 set and altering the type of the column in-place, although this does require
 some interesting casting from <code>account_state</code> to <code>TEXT</code> to <code>account_state_new</code>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>-- create a new type with our variants
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TYPE</span> account_state_new <span style=color:#66d9ef>AS</span> ENUM (<span style=color:#e6db74>&#39;OPENED&#39;</span>, <span style=color:#e6db74>&#39;CLOSED&#39;</span>, <span style=color:#e6db74>&#39;PENDING&#39;</span>);
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TYPE</span> account_state_new <span style=color:#66d9ef>AS</span> ENUM (<span style=color:#e6db74>&#39;OPENED&#39;</span>, <span style=color:#e6db74>&#39;CLOSED&#39;</span>, <span style=color:#e6db74>&#39;PENDING&#39;</span>);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>-- cast the existing column to the new type
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>COLUMN</span> <span style=color:#66d9ef>state</span> <span style=color:#66d9ef>TYPE</span> account_state_new <span style=color:#66d9ef>USING</span> <span style=color:#66d9ef>state</span>::TEXT::account_state_new;
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>COLUMN</span> <span style=color:#66d9ef>state</span> <span style=color:#66d9ef>TYPE</span> account_state_new <span style=color:#66d9ef>USING</span> <span style=color:#66d9ef>state</span>::TEXT::account_state_new;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>-- drop the old type
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>TYPE</span> account_state;
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>TYPE</span> account_state;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>-- rename the new one as part of tidying up
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TYPE</span> account_state_new <span style=color:#66d9ef>RENAME</span> <span style=color:#66d9ef>TO</span> account_state;
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TYPE</span> account_state_new <span style=color:#66d9ef>RENAME</span> <span style=color:#66d9ef>TO</span> account_state;
 </span></span></code></pre></div><p>This approach probably won&rsquo;t work so well on a large table, since it will take
 an access exclusive lock on it. This will block all reads and writes while the
 database is either checking that the cast is valid (requiring reading every
@@ -75,7 +75,7 @@ definition for the one we&rsquo;d like to change:</p><div class=highlight><pre t
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  oid   <span style=color:#f92672>|</span> enumlabel <span style=color:#f92672>|</span>    typname
 </span></span><span style=display:flex><span><span style=color:#75715e>--------+-----------+---------------
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span> <span style=color:#ae81ff>804946</span> <span style=color:#f92672>|</span> PENDING   <span style=color:#f92672>|</span> account_state
+</span></span></span><span style=display:flex><span> <span style=color:#ae81ff>804946</span> <span style=color:#f92672>|</span> PENDING   <span style=color:#f92672>|</span> account_state
 </span></span><span style=display:flex><span> <span style=color:#ae81ff>804940</span> <span style=color:#f92672>|</span> SUSPENDED <span style=color:#f92672>|</span> account_state
 </span></span><span style=display:flex><span> <span style=color:#ae81ff>804938</span> <span style=color:#f92672>|</span> CLOSED    <span style=color:#f92672>|</span> account_state
 </span></span><span style=display:flex><span> <span style=color:#ae81ff>804936</span> <span style=color:#f92672>|</span> OPENED    <span style=color:#f92672>|</span> account_state
@@ -90,7 +90,7 @@ can add one of these onto the table:</p><div class=highlight><pre tabindex=0 sty
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>state</span> TEXT <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>-- new, defining our check constraint
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>CONSTRAINT</span> chk_account_state <span style=color:#66d9ef>CHECK</span> (<span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;OPENED&#39;</span> <span style=color:#66d9ef>OR</span> <span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;CLOSED&#39;</span>)
+</span></span></span><span style=display:flex><span>    <span style=color:#66d9ef>CONSTRAINT</span> chk_account_state <span style=color:#66d9ef>CHECK</span> (<span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;OPENED&#39;</span> <span style=color:#66d9ef>OR</span> <span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;CLOSED&#39;</span>)
 </span></span><span style=display:flex><span>);
 </span></span><span style=display:flex><span><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span>
 </span></span></code></pre></div><p>This works largely the same as before, we can happily insert values if they&rsquo;re
@@ -104,20 +104,20 @@ valid and we get errors if not:</p><div class=highlight><pre tabindex=0 style=co
 </span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>SELECT</span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>FROM</span> account;
 </span></span><span style=display:flex><span> id <span style=color:#f92672>|</span> <span style=color:#66d9ef>state</span>
 </span></span><span style=display:flex><span><span style=color:#75715e>----+--------
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> OPENED
+</span></span></span><span style=display:flex><span>  <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> OPENED
 </span></span><span style=display:flex><span>(<span style=color:#ae81ff>1</span> <span style=color:#66d9ef>row</span>)
 </span></span></code></pre></div><p>Adding new values becomes a bit more complicated though. Instead of just adding
 a new variant to the type, we&rsquo;ll need to redefine the check constraint itself,
 drop the old one and then rename it:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>-- add the new constraint
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account
 </span></span><span style=display:flex><span><span style=color:#66d9ef>ADD</span> <span style=color:#66d9ef>CONSTRAINT</span> chk_account_state_new
 </span></span><span style=display:flex><span><span style=color:#66d9ef>CHECK</span> (<span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;OPENED&#39;</span> <span style=color:#66d9ef>OR</span> <span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;CLOSED&#39;</span> <span style=color:#66d9ef>OR</span> <span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;PENDING&#39;</span>);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>-- drop the old constraint
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account <span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>CONSTRAINT</span> chk_account_state;
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account <span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>CONSTRAINT</span> chk_account_state;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>-- rename the new constraint
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account
 </span></span><span style=display:flex><span><span style=color:#66d9ef>RENAME</span> <span style=color:#66d9ef>CONSTRAINT</span> chk_account_state_new
 </span></span><span style=display:flex><span><span style=color:#66d9ef>TO</span> chk_account_state;
 </span></span></code></pre></div><p>This is more fiddly than the enum-based approach, as well as being harder to
@@ -126,18 +126,18 @@ order to allow it to apply trivially.</p><p>Even then, PostgreSQL is not clever 
 to check the table data. This can be done asynchronously by adding the
 constraint as not valid and then validating it, but it&rsquo;s definitely more of a
 headache than the enum version.</p><p>Removing a variant is the exact same process but in reverse:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>-- update any existing data
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>UPDATE</span> account <span style=color:#66d9ef>SET</span> <span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;CLOSED&#39;</span> <span style=color:#66d9ef>WHERE</span> <span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;PENDING&#39;</span>;
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>UPDATE</span> account <span style=color:#66d9ef>SET</span> <span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;CLOSED&#39;</span> <span style=color:#66d9ef>WHERE</span> <span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;PENDING&#39;</span>;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>-- add the new constraint
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account
 </span></span><span style=display:flex><span><span style=color:#66d9ef>ADD</span> <span style=color:#66d9ef>CONSTRAINT</span> chk_account_state_new
 </span></span><span style=display:flex><span><span style=color:#66d9ef>CHECK</span> (<span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;OPENED&#39;</span> <span style=color:#66d9ef>OR</span> <span style=color:#66d9ef>state</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;CLOSED&#39;</span>);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>-- drop the old constraint
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account <span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>CONSTRAINT</span> chk_account_state;
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account <span style=color:#66d9ef>DROP</span> <span style=color:#66d9ef>CONSTRAINT</span> chk_account_state;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>-- rename the new constraint
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account
+</span></span></span><span style=display:flex><span>postgres<span style=color:#f92672>=#</span> <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> account
 </span></span><span style=display:flex><span><span style=color:#66d9ef>RENAME</span> <span style=color:#66d9ef>CONSTRAINT</span> chk_account_state_new
 </span></span><span style=display:flex><span><span style=color:#66d9ef>TO</span> chk_account_state;
 </span></span></code></pre></div><p>Generally speaking, working with the constraints is pretty straightforward.
@@ -158,7 +158,7 @@ column and a <code>name</code> which represents the enum variant.</p><div class=
 </span></span><span style=display:flex><span>    account_state_id BIGINT <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>-- new, defining our foreign key constraint
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>CONSTRAINT</span> fk_account_account_state_id
+</span></span></span><span style=display:flex><span>    <span style=color:#66d9ef>CONSTRAINT</span> fk_account_account_state_id
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>FOREIGN</span> <span style=color:#66d9ef>KEY</span> (account_state_id)
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>REFERENCES</span> account_state (id)
 </span></span><span style=display:flex><span>);
@@ -176,7 +176,7 @@ tables together and rename the <code>name</code> column to make more sense:</p><
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span> id <span style=color:#f92672>|</span> account_state
 </span></span><span style=display:flex><span><span style=color:#75715e>----+---------------
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> OPENED
+</span></span></span><span style=display:flex><span>  <span style=color:#ae81ff>1</span> <span style=color:#f92672>|</span> OPENED
 </span></span><span style=display:flex><span>(<span style=color:#ae81ff>1</span> <span style=color:#66d9ef>row</span>)
 </span></span></code></pre></div><p>Adding values becomes very easy however, requiring a simple insert into the
 table:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>INSERT</span> <span style=color:#66d9ef>INTO</span> account_state (name) <span style=color:#66d9ef>VALUES</span> (<span style=color:#e6db74>&#39;PENDING&#39;</span>);
