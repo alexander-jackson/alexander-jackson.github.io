@@ -36,11 +36,27 @@ over the span of the year.
 
 ## Creative Output
 
-- Technical writing and blogging goals
-- Blogging frequency (e.g., 1 post/month)
-- Topics you want to explore
-- Building an audience or community
-- Side projects or open source contributions
+I've always loved good quality technical writing, where the author either
+reduces a complex topic down to the very basics or dives unreasonably deep into
+something you felt like you already knew well.
+
+As part of this, I've done some technical writing of my own over the past
+couple of years. Lots of this has been internal to my professional life where I
+have written long-form blog posts about how we do things at Starling or
+problems we have run into, but I've also started writing more adhoc outside of
+work (although still in a technical capacity).
+
+Writing for my own blog gives me a little bit more freedom in terms of what I
+talk about and the style of communication, as well as feeling like there's a
+lower bar for entry as it won't be used to assess me professionally quite so
+much. Announcing a blog post to hundreds of engineers I work with feels like
+being in the spotlight more.
+
+As part of this area, I'd like to commit to writing at least one blog post per
+month. This will stretch me both in terms of writing skills as well as
+organisation as some months may be quite busy and I'd still like to hit that
+target. I'll need to run ahead a little in terms of topics, just so I don't get
+to the end of a month and have no idea what to write about.
 
 ## Health & Fitness
 
