@@ -227,10 +227,19 @@ down to Athens or something.
 
 ## Home & Environment
 
-- Creating a space that supports your goals
-- Small improvements or changes
-- Organization and decluttering
-- Making your environment more functional or enjoyable
+When we moved into the flat in Clapham, we signed a 2 year contract and thus
+avoided making some improvements that would have been worthwhile in the long
+run given we stayed there for 4 years in the end.
+
+While I'm not sure how long we will be in Monument, it's worth not repeating
+the mistakes of the past. There are plenty of things I can pick up (and already
+have) that will be transferable to a new place of residence and I still have at
+least 8 months left there.
+
+Most of this is incremental and very fuzzy in terms of goal setting. Each
+month, I should try and remind myself to make at least one improvement to the
+flat. Over time this will compound, and by the time we leave I'll have
+accumulated plenty of useful posessions.
 
 ## Staying Accountable
 
