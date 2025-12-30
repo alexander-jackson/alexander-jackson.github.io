@@ -51,6 +51,11 @@ for improving my own abilities technically, and this will form part of my goals
 discussion with Martin, but these will be more difficult than expanding my
 managerial skills.
 
+A concrete goal would be to get both April and Joe promoted. They're both great
+engineers in different ways and Joe is certainly thinking about this in the
+short term. I'd also like to get a pay rise as recognition for my team
+leadership skills, as that's measurable too.
+
 ## Creative Output
 
 I've always loved good quality technical writing, where the author either
@@ -90,8 +95,12 @@ months as it has allowed me to push individual exercises and force myself to
 progress. I do feel like I am noticing physical differences in my body from the
 focused effort, so that's going to need to continue.
 
-In this area, I might want to put some time into improving `opentracker.app` so
-I can use the data I'm inputting to provide more insights to my progression.
+As part of this, I should put some time into improving `opentracker.app`. This
+involves moving it into the new `engineering` monorepo and committing to
+maintaining it a little more. It's going to need a bunch of dependency
+upgrades, but the first feature should be showing data from previous sessions
+when adding a new exercise. There's plenty of good data being input that can be
+used for additional progression.
 
 ### Swimming
 
@@ -165,7 +174,8 @@ In terms of goals here, there's nothing particularly concrete. I don't know how
 much time I will spend dating, but I want to get to the end of the year and
 feel like I had a good crack at it. I might not find the partner I spend the
 rest of my life with, but I want to take some risks, get out of my comfort
-zone and have some fun while doing it.
+zone and have some fun while doing it. Let's aim to go on at least one date
+every month.
 
 ## Financial Literacy & Growth
 
@@ -236,6 +246,11 @@ Bosnia, Montenegro, North Macedonia and Albania. Transport links wouldn't be as
 good in those areas, but it would be cool to continue where I left off and head
 down to Athens or something.
 
+In terms of new environments, let's set the goal of expanding my options this
+year. Being able to drive will give me access to more remote areas of the world
+and allow me to take others with me instead of being more of a burden. Let's
+aim to learn how to drive before I turn 27, which will be at the start of June.
+
 ## Home & Environment
 
 When we moved into the flat in Clapham, we signed a 2 year contract and thus
@@ -251,3 +266,20 @@ Most of this is incremental and very fuzzy in terms of goal setting. Each
 month, I should try and remind myself to make at least one improvement to the
 flat. Over time this will compound, and by the time we leave I'll have
 accumulated plenty of useful posessions.
+
+## Staying Accountable
+
+As mentioned before, the aim here will be monthly reviews of each section. This
+will need some calendar planning to ensure consistency, but I'd like to at
+least remind myself of how I felt at the start of the year so I can drive
+forward for the rest of it.
+
+Ideally each month will have a short post describing where I'm at and the
+progress I have made. This will allow me to redirect focus and reflect on
+whether the goals I have set are reasonable and actually what I want to be
+doing.
+
+Being off track isn't necessarily a problem for a short period. Different parts
+of the year will make different goals more tractable, so focus will shift over
+time. As long as each of the sections make some form of progress over the
+course of the year, that's the important part.
