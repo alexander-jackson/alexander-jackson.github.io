@@ -60,19 +60,95 @@ to the end of a month and have no idea what to write about.
 
 ## Health & Fitness
 
-- Physical goals and what progress looks like
-- Triathlon training plans and milestones
-- Habits you want to build (exercise, nutrition, sleep)
-- How you want to feel physically
-- Consistency and sustainability
+This area has certainly taken more focus over the course of 2025 than 2024 with
+all the training for Hackney Half and the renewed focus on my strength
+training. Although the former has faded away and I'm not doing quite so much
+running, it was a nice reminder that I could if it felt like the right
+direction.
+
+### Training
+
+I've really enjoyed tracking all my training sessions for the past couple of
+months as it has allowed me to push individual exercises and force myself to
+progress. I do feel like I am noticing physical differences in my body from the
+focused effort, so that's going to need to continue.
+
+In this area, I might want to put some time into improving `opentracker.app` so
+I can use the data I'm inputting to provide more insights to my progression.
+
+### Swimming
+
+Within the next couple days of writing this, my membership at Third Space will
+start and I'll have much easier access to a swimming pool. I've got a pair of
+goggles and some earplugs, so the intention is to improve my swimming ability
+and work towards the half Ironman swimming distance of 1.9km in a single go. I
+have no idea how hard this will be, I obviously have the strength and physical
+endurance to do it but will need to figure out the technique. This will
+probably mark the start of some very busy weeks as I attempt to fit all the
+training in, but I actually quite enjoyed that with Hackney at times.
+
+### General Care
+
+Over the last couple of years, I've started putting a lot more thought into my
+general upkeep as a person. This has included improved personal grooming and
+changing the way I dress, but there's not too much more to be done with regards
+to those outside of incremental improvements.
+
+As part of this, I've started having more frequent dentist appointments and
+focusing on my dental hygiene. These have generally come back very well, so
+I've started considering getting my teeth whitened with the knowledge that it
+would last a long time given the care I take. I'm also tempted by Invisalign to
+sort out the remaining unevenness in my teeth and get some new retainers for
+afterwards.
+
+On top of this, I've started considering getting private treatment for the
+psoriasis on my arms. I'm not sure how much this would cost or how much effort
+it would take, but it might be worth gambling on it.
+
+I've also considered getting laser eye surgery to correct my vision, but that
+seems like it has a poor cost to benefit ratio given that I don't have any real
+problems with contact lenses and Lasik can cost ~£7000.
 
 ## Relationships & Social Life
 
-- Romantic relationship goals
-- Platonic friendships (deepening existing, making new)
-- Being more present with people
-- Social activities or communities to join
-- Quality time and meaningful connections
+Where 2024 built a lot of new friendships that I have carried over, 2025
+largely worked on solidifying them. People like Rob, Lucie and Caitlin have
+become some of my closest friends and my social life is much more vibrant than
+it used to be (I have to maintain a calendar now, which is a nice downside).
+
+### Platonic
+
+With Rob and I fully moved into the flat now, I'm keen to host more events at
+ours as time goes on. We've got a big space to work with and I'd like to have
+excuses to see my friends more regularly. Hosting is a social good, it brings
+together people who have a good chance of connecting with each other and gets
+people chatting.
+
+The focus here will be around expanding my group and deepening my existing
+friendships. I don't meet new people as much as I like, perhaps a goal can be
+to talk to a person I don't consider my friend currently at every gathering I
+go to.
+
+### Romantic
+
+The elephant in the room. At some point I should probably write an entire post
+about this just to really see how I feel, but the crux of the matter is that I
+have been single for almost 2 years now and it's probably time to get back out
+there.
+
+I've made a huge amount of change to myself and really began to understand who
+I am, how I operate and what I want in life. I'm much more confident in myself
+than I was before and relatively certain that I have what it takes to be a
+great partner. I've spent a lot of time in the last 2 years talking to others
+about their relationships and understanding the way people work. I have no
+intention of being single for the rest of my life, so there's no time like the
+present to begin avoiding that outcome.
+
+In terms of goals here, there's nothing particularly concrete. I don't know how
+much time I will spend dating, but I want to get to the end of the year and
+feel like I had a good crack at it. I might not find the partner I spend the
+rest of my life with, but I want to take some risks, get out of my comfort
+zone and have some fun while doing it.
 
 ## Financial Literacy & Growth
 
