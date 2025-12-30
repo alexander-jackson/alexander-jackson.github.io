@@ -187,12 +187,6 @@ over time.
 
 ## Hobbies & Exploration
 
-- Getting outside your comfort zone
-- New experiences you want to try
-- Interests to pursue or develop
-- Saying yes to opportunities
-- Balance between structured and spontaneous activities
-
 Much like some of the other sections, 2024 was a little bit of a breakthrough
 year for me in terms of this component and 2025 built on what that had
 provided. I did a couple of solo travelling trips through Europe, camped for
