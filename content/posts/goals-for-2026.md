@@ -197,12 +197,16 @@ should consolidate those into my existing accounts.
 I also need to rebalance my investments as I'm currently weighted heavily
 towards Cash ISA products instead of my Stocks and Shares ISA with Vanguard.
 Moving these around would give me a little more risk exposure, which at my age
-is likely a good thing as I have no upcoming purchases.
+is likely a good thing as I have no upcoming purchases. I have the ability to
+max out the ISA this year and next year (although not all of next year needs to
+go into the Stocks and Shares ISA), so that should be a priority for future
+financial health.
 
-On top of this, I should commit the time to reading 2 books on investments and
-starting to actively use my Trading 212 account with a small amount of funds. I
-have some disposible income I can use here, so it might as well go into
-learning how this works.
+On top of this, I should commit the time to reading 2 books on investments
+before the end of the financial year and start to actively use my Trading 212
+account with a small amount of funds, somewhere in the range of one or two
+thousand pounds. I have some disposible income I can use here, so it might as
+well go into learning how this works.
 
 ## Hobbies & Exploration
 
