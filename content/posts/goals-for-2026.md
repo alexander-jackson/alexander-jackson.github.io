@@ -176,6 +176,55 @@ over time.
 - Saying yes to opportunities
 - Balance between structured and spontaneous activities
 
+Much like some of the other sections, 2024 was a little bit of a breakthrough
+year for me in terms of this component and 2025 built on what that had
+provided. I did a couple of solo travelling trips through Europe, camped for
+the first time since I went to Tanzania and said yes to anything I possibly
+could.
+
+2025 focused more on travelling with friends and settling into the hobbies I
+found the most joy in. I went to new countries (Morocco and Portgual), went
+back to others I had enjoyed before (Italy, France and Slovenia) and generally
+had a blast with some of my closest friends. The highlights include:
+
+* Lisbon and Porto with Krish, Jiano and Mohit
+* French roadtrip with Rob
+* Lake Bled in Slovenia with Caitlin and James
+
+### New Activities
+
+There are a couple of things I'd like to try and find the time for this year,
+that I didn't get a chance to do in previous ones.
+
+The first of these is paragliding. I wanted to do this when I travelled through
+Austria in the summer of 2024, but the weather wasn't good enough and Zell Am
+See was too inconvenient to make it to. As much as I'm scared of heights, I
+love the idea of getting a bird's eye view of a beautiful landscape and it will
+push me out of my comfort zone.
+
+### New Environments
+
+Since 2025 focused more on holidays with my friends, it didn't leave quite as
+much scope for new countries or areas to be explored. 2026 feels like a good
+time to make this a more focused effort.
+
+I've always said that I wanted to travel to South America or Asia with a
+partner and I feel like that still holds true. If I don't meet the right person
+within the first half of 2026, it's unlikely that this will be achievable this
+year. There's still room for a solo trip but that depends more on my appetite
+for that sort of thing.
+
+With continent expansion potentially off the table, it's worth considering the
+parts of Europe I'm yet to visit. I'd really like to drive around Iceland and
+Norway, so perhaps this necessitates another goal of finally learning how to
+drive.
+
+There's also the option of exploring Eastern Europe more. My first interrailing
+trip concluded in Budapest where I could have headed down towards Serbia,
+Bosnia, Montenegro, North Macedonia and Albania. Transport links wouldn't be as
+good in those areas, but it would be cool to continue where I left off and head
+down to Athens or something.
+
 ## Home & Environment
 
 - Creating a space that supports your goals
