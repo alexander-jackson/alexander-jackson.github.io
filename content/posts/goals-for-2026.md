@@ -189,11 +189,20 @@ I've got enough money to think about making some big purchases without too much
 hesitation such as my watch and Invisalign, and it's not usually a concern for
 me which is good in terms of stability.
 
-That being said, I always wonder whether I could be doing more with it. At my
-age there's definitely the opportunity to take more risks and potentially have
-a higher reward, so perhaps this should be something I look at in 2026. Getting
-a book on financial literacy might be a good starting point that I can build on
-over time.
+That being said, there are some clear improvements I have been holding out on
+here. I have some childhood ISA accounts which will be earning terrible
+interest rates (and at the very least, aren't currently easily accessible) so I
+should consolidate those into my existing accounts.
+
+I also need to rebalance my investments as I'm currently weighted heavily
+towards Cash ISA products instead of my Stocks and Shares ISA with Vanguard.
+Moving these around would give me a little more risk exposure, which at my age
+is likely a good thing as I have no upcoming purchases.
+
+On top of this, I should commit the time to reading 2 books on investments and
+starting to actively use my Trading 212 account with a small amount of funds. I
+have some disposible income I can use here, so it might as well go into
+learning how this works.
 
 ## Hobbies & Exploration
 
