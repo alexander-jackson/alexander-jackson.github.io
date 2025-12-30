@@ -152,11 +152,21 @@ zone and have some fun while doing it.
 
 ## Financial Literacy & Growth
 
-- Learning about investing and financial markets
-- Specific financial milestones or targets
-- Building knowledge in this area
-- Concrete steps to take (reading, courses, advisors)
-- Long-term financial planning
+Financially speaking, I'm doing well for my age. I've got a well paying job
+that provides me with a consistent income and I have the ability to save a lot
+of money each month regardless of the rent that I am currently paying. My money
+is relatively well diversified, with some of it in regular savings accounts,
+other bits in various ISA accounts and small amounts in my regular balance.
+
+I've got enough money to think about making some big purchases without too much
+hesitation such as my watch and Invisalign, and it's not usually a concern for
+me which is good in terms of stability.
+
+That being said, I always wonder whether I could be doing more with it. At my
+age there's definitely the opportunity to take more risks and potentially have
+a higher reward, so perhaps this should be something I look at in 2026. Getting
+a book on financial literacy might be a good starting point that I can build on
+over time.
 
 ## Hobbies & Exploration
 
