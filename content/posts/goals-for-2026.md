@@ -240,11 +240,3 @@ Most of this is incremental and very fuzzy in terms of goal setting. Each
 month, I should try and remind myself to make at least one improvement to the
 flat. Over time this will compound, and by the time we leave I'll have
 accumulated plenty of useful posessions.
-
-## Staying Accountable
-
-- How you'll check in on progress (monthly, quarterly)
-- What success looks like for each area
-- How you'll adjust course if needed
-- Who or what will keep you accountable
-- Celebrating wins along the way
