@@ -28,11 +28,28 @@ over the span of the year.
 
 ## Professional Growth
 
-- Career aspirations and progression
-- Technical skills to develop
-- Impact you want to have at work
-- Projects you want to tackle
-- Professional relationships to build
+Where most sections list the success in 2024 compared to a solidification in
+2025, the opposite is probably true for this area. The former was a very
+relaxed year professionally, which saw me focus on other areas of my life for
+the time being. The latter, after the move to Monument, saw this become much
+more of a focus.
+
+I come into 2026 leading a team of 5 engineers and trying to understand what I
+need to do in order to improve them. This is going to involve a lot of soft
+skills, through chatting to each of them about their progression and generally
+acting as a barrier so they can get their work done.
+
+Each of them are going to require different things from me in different
+measures. The requirements of managing someone like Victor are going to be
+vastly different to someone like Debbie. April and Joe present their own
+challenges as well, with the aim to push them towards the higher software
+engineering levels.
+
+Success and progression in this area will likely be measured through the
+success and progression of the engineers I am leading. There's certainly scope
+for improving my own abilities technically, and this will form part of my goals
+discussion with Martin, but these will be more difficult than expanding my
+managerial skills.
 
 ## Creative Output
 
