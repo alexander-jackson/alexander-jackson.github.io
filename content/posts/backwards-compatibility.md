@@ -6,6 +6,8 @@ showtoc: true
 
 When we're discussing APIs in software engineering, you'll hear the term "backwards compatibility" thrown around a lot. What does this actually mean?
 
+Simply put, backwards compatibility means that changes to your API won't break existing clients. When you modify an endpoint, older versions of your app should still work without requiring users to update immediately.
+
 ## Our initial endpoint
 
 Let's imagine we have an endpoint that looks as follows:
@@ -127,3 +129,7 @@ void createPayment(
 ```
 
 This allows clients to begin supplying the new `reference` field without us working out how to handle it yet. Once we've got everything migrated, we can make the same change as before to make it required and then begin using it without any of the `null` handling.
+
+## Conclusion
+
+Backwards compatibility is all about ensuring that changes to your API don't break existing clients that haven't been updated yet. By introducing fields as nullable first, we have the ability to introduce new features and functionality without breaking existing ones.
