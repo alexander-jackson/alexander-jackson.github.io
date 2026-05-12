@@ -61,3 +61,34 @@ required.
 Financially, I'm probably doing quite well, I've got a lot of money saved up
 and based on recent changes my investments and financial decisions should set
 me up well for the future.
+
+## Subjective success
+
+However, subjective success is always more difficult to reason about.
+
+Often I focus on the aspects I feel that are behind everyone else, like the
+lack of a partner, some of my social skills and general attitude towards my
+appearence.
+
+All of these are actively being worked on, but perhaps I should step back and
+keep things in perspective more often. Having drive towards my goals is
+important, but I can't allow it to cause me to feel behind all the time when
+that's not the objective reality.
+
+Life will always feel like more can be done, and a constant regret about what I
+could have been doing won't lead me towards happiness. As I always remind
+myself, it is only possible to make the best decision you can in the moment
+with the information you currently have.
+
+Hindsight will always allow you to have made a better decision, but you didn't
+have that knowledge at the time. Should I have started Invisalign 2 and a half
+years ago? Should I have focused more on my diet and training? Should I have
+been starting conversations with people all the time? Probably yes, but I
+didn't know where I was going.
+
+At the moment and in the future, I'm trying to do more long term planning and
+understand where I think I will want to be in the coming months and years. I
+want to look back on the decisions I am making now, and thank myself for what I
+tried. They don't have to be perfect, they just have to be making steps in the
+right direction. Reframing what the sports centre at Warwick used to say, speed
+isn't the most important factor in velocity.
