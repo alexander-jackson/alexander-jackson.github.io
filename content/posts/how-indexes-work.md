@@ -47,3 +47,104 @@ If we imagine some data in our table, it might look as follows:
   5 | Lucy
 (5 rows)
 ```
+
+## Searching for some data
+
+Now, we want to find the rows where the name column is equal to `Matthew`. We
+would just query that as follows:
+
+```sql
+> SELECT id
+  FROM person
+  WHERE name = 'Matthew';
+ id
+----
+  4
+(1 row)
+```
+
+It's worth trying to build a mental model of what the database is doing here.
+The most naive approach (and what will happen in this case) is to look at each
+row and check whether the name is equal to `Matthew.`
+
+We can also ask PostgreSQL how it executes this by requesting a query plan:
+
+```
+> EXPLAIN (COSTS FALSE) SELECT id
+  FROM person
+  WHERE name = 'Matthew';
+             QUERY PLAN
+------------------------------------
+ Seq Scan on person
+   Filter: (name = 'Matthew'::text)
+(2 rows)
+```
+
+Here, we're asking the planner to explain what it wants to do (and hiding the
+cost outputs, since they're not entirely relevant in this case).
+
+As we can see, the database thinks that the best option it has is to
+sequentially scan the table (reading each row in order) and filtering for the
+ones where the `name` column is equal to `Matthew`, just as we expected.
+
+This will require the database to look at all 5 of the rows. While this doesn't
+seem like much for a small example, if we had millions of people in the
+database this might take a while!
+
+## Adding an index
+
+We'll start by making a big assumption, that we'll never have 2 people with the
+same name. As unlikely as this is in practice, it'll make this example a bit
+simpler by allowing us to use a unique index.
+
+Index creation just requires the name of the index, the name of the table and
+the columns we want to create it on:
+
+```sql
+> CREATE UNIQUE INDEX uk_person_name
+  ON person (name);
+CREATE INDEX
+```
+
+As we can see, the database now uses our index to satisfy that query:
+
+```sql
+> EXPLAIN (COSTS FALSE) SELECT id
+  FROM person
+  WHERE name = 'Matthew';
+             QUERY PLAN
+------------------------------------
+ Seq Scan on person
+   Filter: (name = 'Matthew'::text)
+(2 rows)
+```
+
+Oh. No it doesn't.
+
+Since there's so little data in the table, PostgreSQL still decides that it's
+faster to just sequentially scan all the rows.
+
+If we increase the [number of
+names](https://github.com/danielmiessler/SecLists/blob/master/Usernames/Names/names.txt)
+in the table:
+
+```
+> SELECT COUNT(*) FROM person;
+ count
+-------
+ 10734
+(1 row)
+```
+
+We can see that the database decides that it is worth using the index now:
+
+```
+> EXPLAIN (COSTS FALSE) SELECT id
+  FROM person
+  WHERE name = 'Matthew';
+                QUERY PLAN
+-------------------------------------------
+ Index Scan using uk_person_name on person
+   Index Cond: (name = 'Matthew'::text)
+(2 rows)
+```
