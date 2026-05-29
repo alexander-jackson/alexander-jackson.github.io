@@ -28,7 +28,7 @@ CREATE TABLE person (
 
 If we imagine some data in our table, it might look as follows:
 
-```
+```sql
 > INSERT INTO person (name)
   VALUES
     ('Alex'),
@@ -69,7 +69,7 @@ row and check whether the name is equal to `Matthew.`
 
 We can also ask PostgreSQL how it executes this by requesting a query plan:
 
-```
+```sql
 > EXPLAIN (COSTS FALSE) SELECT id
   FROM person
   WHERE name = 'Matthew';
@@ -119,16 +119,18 @@ As we can see, the database now uses our index to satisfy that query:
 (2 rows)
 ```
 
-Oh. No it doesn't.
+Oh. No it doesn't. Since there's so little data in the table, PostgreSQL still
+decides that it's faster to just sequentially scan all the rows.
 
-Since there's so little data in the table, PostgreSQL still decides that it's
-faster to just sequentially scan all the rows.
+Indexes aren't always appropriate until you have a certain amount of data in
+the table, but having one there won't make your queries slower, it just adds a
+little bit of extra work when inserting data.
 
 If we increase the [number of
 names](https://github.com/danielmiessler/SecLists/blob/master/Usernames/Names/names.txt)
 in the table:
 
-```
+```sql
 > SELECT COUNT(*) FROM person;
  count
 -------
@@ -138,7 +140,7 @@ in the table:
 
 We can see that the database decides that it is worth using the index now:
 
-```
+```sql
 > EXPLAIN (COSTS FALSE) SELECT id
   FROM person
   WHERE name = 'Matthew';
@@ -148,3 +150,50 @@ We can see that the database decides that it is worth using the index now:
    Index Cond: (name = 'Matthew'::text)
 (2 rows)
 ```
+
+We can check whether this has improved the performance of our query by using the `EXPLAIN ANALYZE` command, which will execute the query and provide timings:
+
+```sql
+> EXPLAIN (
+    ANALYZE TRUE,
+    COSTS FALSE,
+    TIMING FALSE,
+    BUFFERS FALSE
+  )
+  SELECT id
+  FROM person
+  WHERE name = 'Matthew';
+                              QUERY PLAN
+----------------------------------------------------------------------
+ Index Scan using uk_person_name on person (actual rows=1.00 loops=1)
+   Index Cond: (name = 'Matthew'::text)
+   Index Searches: 1
+ Planning Time: 0.189 ms
+ Execution Time: 0.112 ms
+(5 rows)
+
+> DROP INDEX uk_person_name;
+
+> EXPLAIN (
+    ANALYZE TRUE,
+    COSTS FALSE,
+    TIMING FALSE,
+    BUFFERS FALSE
+  )
+  SELECT id
+  FROM person
+  WHERE name = 'Matthew';
+                  QUERY PLAN
+-----------------------------------------------
+ Seq Scan on person (actual rows=1.00 loops=1)
+   Filter: (name = 'Matthew'::text)
+   Rows Removed by Filter: 10733
+ Planning Time: 0.168 ms
+ Execution Time: 1.174 ms
+(5 rows)
+```
+
+As we can see, the query with the index is around 10 times faster than the one
+without, even with a relatively small amount of data in the table. This
+difference will only increases as the size of the table grows, which is why
+indexes are so important for performance.
