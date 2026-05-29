@@ -197,3 +197,74 @@ As we can see, the query with the index is around 10 times faster than the one
 without, even with a relatively small amount of data in the table. This
 difference will only increases as the size of the table grows, which is why
 indexes are so important for performance.
+
+## How they work
+
+Database indexes work like a reverse lookup table. If we imagine our table as a
+long list of rows, an index allows us to provide a search value and find out
+where it exists in the list.
+
+Where a sequential scan only allows us to remove a single row from the search
+area per operation (by checking one at a time), indexes allow us to remove many
+through the ordering of the data.
+
+Let's instead imagine that our small table was sorted:
+
+```sql
+> SELECT *
+  FROM person
+  ORDER BY name;
+ id |  name
+----+---------
+  1 | Alex
+  3 | April
+  2 | James
+  5 | Lucy
+  4 | Matthew
+(5 rows)
+```
+
+We can represent this as a tree structure, where all elements that come before
+the current node are to the left of it, and all elements that come after it are
+stored to the right of it:
+
+```
+             (Lucy,5)
+            /        \
+       (April,3)  (Matthew,4)
+      /         \
+ (Alex,1)    (James,2)
+```
+
+The tree contains both the name of the person and the index they appear in the
+table that represents our list.
+
+In order to search for someone, let's say `Matthew`, we always start at the
+root node which is `(Lucy, 5)` in our example. We compare `Lucy` to `Matthew`
+and find that `Matthew` would come afterwards, so we head down the righthand
+branch.
+
+We then check that node, and find that it is equal to the search string. That
+allows us to take the `id` field and immediately grab the row, knowing that we
+can find his data at index `4`.
+
+This isn't particularly helpful when we only have an `id` and a `name`, but if
+we were searching for Matthew's phone number then this would allow us to grab
+it after only 2 operations.
+
+If we wanted to search for `James` the process would be very similar:
+
+* `James` comes before `Lucy`, so we head left
+* `April` comes before `James`, so we head right
+* This node matches, so we go to index `2`
+
+For a node that doesn't match, like `John`, we would perform the following
+operations:
+
+* `John` comes before Lucy, so we head left
+* `April` comes before `John`, so we head right
+* `James` comes before `John`, so we head right
+* There is no node here, so `John` doesn't exist
+
+Since on average we remove half of the tree each time we make a decision, this
+means 
