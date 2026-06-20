@@ -1,7 +1,7 @@
 ---
 title: "How Indexes Work"
 date: 2026-05-21T20:57:36+01:00
-draft: true
+draft: false
 showtoc: true
 ---
 
@@ -14,8 +14,7 @@ benefits?
 
 ## Storing people
 
-We'll start by considering a basic table to store people, with no indexes on
-it:
+We'll start by considering a basic table to store people, with no indexes on it:
 
 ```sql
 CREATE TABLE person (
@@ -88,8 +87,8 @@ sequentially scan the table (reading each row in order) and filtering for the
 ones where the `name` column is equal to `Matthew`, just as we expected.
 
 This will require the database to look at all 5 of the rows. While this doesn't
-seem like much for a small example, if we had millions of people in the
-database this might take a while!
+seem like much for a small example, if we had millions of people in the database
+this might take a while!
 
 ## Adding an index
 
@@ -122,12 +121,12 @@ As we can see, the database now uses our index to satisfy that query:
 Oh. No it doesn't. Since there's so little data in the table, PostgreSQL still
 decides that it's faster to just sequentially scan all the rows.
 
-Indexes aren't always appropriate until you have a certain amount of data in
-the table, but having one there won't make your queries slower, it just adds a
+Indexes aren't always appropriate until you have a certain amount of data in the
+table, but having one there won't make your queries slower, it just adds a
 little bit of extra work when inserting data.
 
-If we increase the [number of
-names](https://github.com/danielmiessler/SecLists/blob/master/Usernames/Names/names.txt)
+If we increase the
+[number of names](https://github.com/danielmiessler/SecLists/blob/master/Usernames/Names/names.txt)
 in the table:
 
 ```sql
@@ -151,7 +150,8 @@ We can see that the database decides that it is worth using the index now:
 (2 rows)
 ```
 
-We can check whether this has improved the performance of our query by using the `EXPLAIN ANALYZE` command, which will execute the query and provide timings:
+We can check whether this has improved the performance of our query by using the
+`EXPLAIN ANALYZE` command, which will execute the query and provide timings:
 
 ```sql
 > EXPLAIN (
@@ -239,32 +239,49 @@ stored to the right of it:
 The tree contains both the name of the person and the index they appear in the
 table that represents our list.
 
-In order to search for someone, let's say `Matthew`, we always start at the
-root node which is `(Lucy, 5)` in our example. We compare `Lucy` to `Matthew`
-and find that `Matthew` would come afterwards, so we head down the righthand
-branch.
+In order to search for someone, let's say `Matthew`, we always start at the root
+node which is `(Lucy, 5)` in our example. We compare `Lucy` to `Matthew` and
+find that `Matthew` would come afterwards, so we head down the righthand branch.
 
 We then check that node, and find that it is equal to the search string. That
 allows us to take the `id` field and immediately grab the row, knowing that we
 can find his data at index `4`.
 
-This isn't particularly helpful when we only have an `id` and a `name`, but if
-we were searching for Matthew's phone number then this would allow us to grab
-it after only 2 operations.
+This isn't obviously helpful when we only have an `id` and a `name` in the
+table, but if we were searching for Matthew's phone number then this would allow
+us to grab it after only 2 operations.
 
 If we wanted to search for `James` the process would be very similar:
 
-* `James` comes before `Lucy`, so we head left
-* `April` comes before `James`, so we head right
-* This node matches, so we go to index `2`
+- `James` comes before `Lucy`, so we head left
+- `April` comes before `James`, so we head right
+- This node matches, so we go to index `2`
 
 For a node that doesn't match, like `John`, we would perform the following
 operations:
 
-* `John` comes before Lucy, so we head left
-* `April` comes before `John`, so we head right
-* `James` comes before `John`, so we head right
-* There is no node here, so `John` doesn't exist
+- `John` comes before `Lucy`, so we head left
+- `April` comes before `John`, so we head right
+- `James` comes before `John`, so we head right
+- There is no node here, so `John` doesn't exist
 
 Since on average we remove half of the tree each time we make a decision, this
-means 
+massively reduces the amount of work we need to do in order to find an entry. We
+can plot the number of decisions we need to make to find someone for various
+table sizes:
+
+| Table Size | Sequential Operations | Index Operations |
+| ---------- | --------------------- | ---------------- |
+| 10         | 10                    | 4                |
+| 100        | 100                   | 7                |
+| 1,000      | 1,000                 | 10               |
+| 10,000     | 10,000                | 13               |
+
+Even as the table size grows by a factor of 10, the number of index operations
+grows very slowly. Going further, for a table with 1 million rows we only
+require ~20 index operations and even at 1 billion rows it's still only ~30
+index operations.
+
+This shows us why indexes are essentially a requirement for large tables and
+databases, because we save the database so much extra work by storing more data
+off to the side.
