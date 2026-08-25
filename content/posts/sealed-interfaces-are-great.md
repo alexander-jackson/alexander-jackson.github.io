@@ -274,3 +274,8 @@ switch (decision) {
 In general, this leads to code which expresses its intention better, as we can
 list all the representations we expect and what the objects should be storing
 in each of them.
+
+Sealed interfaces don't give us the exact same syntax as Rust's `enum` and are
+a little more verbose, but they provide the same guarantees: a fixed set of
+variants, each carrying only the data relevant to it, checked for us by the
+compiler.
