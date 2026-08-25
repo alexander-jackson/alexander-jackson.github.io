@@ -1,6 +1,6 @@
 ---
 title: "Sealed Interfaces Are Great"
-date: 2026-08-20T15:39:03+01:00
+date: 2026-08-25T16:00:03+01:00
 draft: false
 showtoc: true
 ---
