@@ -245,6 +245,27 @@ There are two nice benefits we get here:
   if needed)
 - We can use pattern matching to extract the fields of the object directly
 
+If we miss a variant or someone adds a new one without it being handled, we get
+a compile failure:
+
+```java
+switch (decision) {
+    case Success() -> {
+        // handle the success case
+    }
+    case Failure(FailureReason reason) -> {
+        // handle the failure case
+    }
+    // missing handling for `Referral`
+}
+```
+
+```bash
+error: the switch statement does not cover all possible input values
+    switch (decision) {
+    ^
+```
+
 In general, this leads to code which expresses its intention better, as we can
 list all the representations we expect and what the objects should be storing
 in each of them.
