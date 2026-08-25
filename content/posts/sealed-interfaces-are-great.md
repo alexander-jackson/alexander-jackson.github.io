@@ -219,6 +219,8 @@ public sealed interface Decision permits Success, Failure, Referral {}
 
 The compiler automatically infers this clause if the records are nested though.
 
+### Exhaustive pattern matching
+
 Instances of `Decision` are still easy to create, and they compose nicely with
 `switch` statements. We can even pull out fields of the states using pattern
 matching:
