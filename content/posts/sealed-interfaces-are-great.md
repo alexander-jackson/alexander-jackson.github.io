@@ -220,7 +220,9 @@ public sealed interface Decision permits Success, Failure, Referral {}
 The compiler automatically infers this clause if the records are nested though.
 
 Instances of `Decision` are still easy to create, and they compose nicely with
-`switch` statements:
+`switch` statements. We can even pull out fields of the states using pattern
+matching:
+
 
 ```java
 Decision failure = new Decision.Failure(FailureReason.INSUFFICIENT_EVIDENCE);
@@ -237,13 +239,6 @@ switch (failure) {
     }
 }
 ```
-
-There are two nice benefits we get here:
-
-- The compiler can guarantee that only these three states can exist in our
-  `switch` cases, so we don't have to handle anything else (other than `null`
-  if needed)
-- We can use pattern matching to extract the fields of the object directly
 
 If we miss a variant or someone adds a new one without it being handled, we get
 a compile failure:
@@ -264,6 +259,17 @@ switch (decision) {
 error: the switch statement does not cover all possible input values
     switch (decision) {
     ^
+```
+
+We don't have to handle `null` by default, but we can if that's a valid state:
+
+```java
+switch (decision) {
+    // others...
+    null -> {
+        // handle the `null` case
+    }
+}
 ```
 
 In general, this leads to code which expresses its intention better, as we can
