@@ -31,7 +31,7 @@ Above, we've defined a type called `Decision` which has two variants called
 `Success` and `Failure`. Unlike a regular `enum` in a lot of languages, the
 `Failure` case also carries some data (the `reason` field) alongside it.
 
-## Using Java classes
+### Using Java classes
 
 We could represent this in Java using a class, but it feels more clunky:
 
@@ -66,7 +66,7 @@ Decision success = Decision.success();
 Decision failure = Decision.failure(FailureReason.INSUFFICIENT_EVIDENCE);
 ```
 
-## Adding new variants
+### Adding new variants
 
 However, it doesn't hold together as nicely if we want to add more options to
 it. Let's imagine we wanted to add a new state, indicating that we decided to
@@ -155,7 +155,7 @@ complexity over time, other engineers might add additional states that require
 other data to be stored, and we haven't even discussed how to get data out of
 this object yet.
 
-## Retrieving stored information
+### Retrieving stored information
 
 If we've got an instance of our decision, how do we work out which one we have?
 Well that's easy, we just look at the decision type:
@@ -183,7 +183,7 @@ Our two options are:
 
 Neither of these are particularly fun to work with.
 
-## The sealed interface approach
+### The sealed interface approach
 
 Regular interfaces allow us to express this type hierarchy more easily, but
 sealed interfaces specifically enable some additional language features and
