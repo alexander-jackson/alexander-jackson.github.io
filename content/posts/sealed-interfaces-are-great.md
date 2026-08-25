@@ -66,6 +66,8 @@ Decision success = Decision.success();
 Decision failure = Decision.failure(FailureReason.INSUFFICIENT_EVIDENCE);
 ```
 
+## Adding new variants
+
 However, it doesn't hold together as nicely if we want to add more options to
 it. Let's imagine we wanted to add a new state, indicating that we decided to
 refer this to another team. In Rust, that becomes:
@@ -152,6 +154,8 @@ It's getting a little hard to follow. You can imagine this might grow in
 complexity over time, other engineers might add additional states that require
 other data to be stored, and we haven't even discussed how to get data out of
 this object yet.
+
+## Retrieving stored information
 
 If we've got an instance of our decision, how do we work out which one we have?
 Well that's easy, we just look at the decision type:
