@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title/><link>https://alexander-jackson.github.io/</link><description>Recent content on</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Thu, 21 May 2026 20:57:36 +0100</lastBuildDate><atom:link href="https://alexander-jackson.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>How Indexes Work</title><link>https://alexander-jackson.github.io/posts/how-indexes-work/</link><pubDate>Thu, 21 May 2026 20:57:36 +0100</pubDate><guid>https://alexander-jackson.github.io/posts/how-indexes-work/</guid><description>&lt;p&gt;Whenever you have a slow performing database query, the immediate suggestion is
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title/><link>https://alexander-jackson.github.io/</link><description>Recent content on</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Thu, 20 Aug 2026 15:39:03 +0100</lastBuildDate><atom:link href="https://alexander-jackson.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Sealed Interfaces Are Great</title><link>https://alexander-jackson.github.io/posts/sealed-interfaces-are-great/</link><pubDate>Thu, 20 Aug 2026 15:39:03 +0100</pubDate><guid>https://alexander-jackson.github.io/posts/sealed-interfaces-are-great/</guid><description>&lt;p&gt;As someone who has written a lot of Rust code, I often find myself looking for
+an equivalent to the &lt;code&gt;enum&lt;/code&gt; keyword in other languages. This lets you nicely
+represent data which might take different shapes in some scenarios:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-rust" data-lang="rust"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;enum&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;FailureReason&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; InsufficientEvidence,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;enum&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Decision&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Success,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Failure {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; reason: &lt;span style="color:#a6e22e"&gt;FailureReason&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; success &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Decision::Successful;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; failure &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Decision::Failure {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; reason: &lt;span style="color:#a6e22e"&gt;FailureReason&lt;/span&gt;::InsufficientEvidence,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Above, we&amp;rsquo;ve defined a type called &lt;code&gt;Decision&lt;/code&gt; which has two variants called
+&lt;code&gt;Success&lt;/code&gt; and &lt;code&gt;Failure&lt;/code&gt;. Unlike a regular &lt;code&gt;enum&lt;/code&gt; in a lot of languages, the
+&lt;code&gt;Failure&lt;/code&gt; case also carries some data (the &lt;code&gt;reason&lt;/code&gt; field) alongside it.&lt;/p&gt;</description></item><item><title>How Indexes Work</title><link>https://alexander-jackson.github.io/posts/how-indexes-work/</link><pubDate>Thu, 21 May 2026 20:57:36 +0100</pubDate><guid>https://alexander-jackson.github.io/posts/how-indexes-work/</guid><description>&lt;p&gt;Whenever you have a slow performing database query, the immediate suggestion is
 always to add an index on it. They can take statements which used to take
 minutes just milliseconds to complete instead.&lt;/p&gt;
 &lt;p&gt;How does an index work though? What allows them to provide these performance
