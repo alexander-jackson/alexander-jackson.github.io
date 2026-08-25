@@ -21,7 +21,7 @@ enum Decision {
     }
 }
 
-let success = Decision::Successful;
+let success = Decision::Success;
 let failure = Decision::Failure {
     reason: FailureReason::InsufficientEvidence,
 };
@@ -214,9 +214,15 @@ Instances of `Decision` are still easy to create, and they compose nicely with
 Decision failure = new Decision.Failure(FailureReason.INSUFFICIENT_EVIDENCE);
 
 switch (failure) {
-    case Success() -> ...,
-    case Failure(reason) -> ...,
-    case Referral(team, reason) -> ...,
+    case Success() -> {
+        // handle the success case
+    }
+    case Failure(FailureReason reason) -> {
+        // handle the failure case
+    }
+    case Referral(Team team, ReferralReason reason) -> {
+        // handle the referral case
+    }
 }
 ```
 
