@@ -223,7 +223,6 @@ Instances of `Decision` are still easy to create, and they compose nicely with
 `switch` statements. We can even pull out fields of the states using pattern
 matching:
 
-
 ```java
 Decision failure = new Decision.Failure(FailureReason.INSUFFICIENT_EVIDENCE);
 
@@ -255,7 +254,7 @@ switch (decision) {
 }
 ```
 
-```bash
+```
 error: the switch statement does not cover all possible input values
     switch (decision) {
     ^
@@ -266,7 +265,7 @@ We don't have to handle `null` by default, but we can if that's a valid state:
 ```java
 switch (decision) {
     // others...
-    null -> {
+    case null -> {
         // handle the `null` case
     }
 }
