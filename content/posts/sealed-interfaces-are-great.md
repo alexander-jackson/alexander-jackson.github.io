@@ -31,6 +31,8 @@ Above, we've defined a type called `Decision` which has two variants called
 `Success` and `Failure`. Unlike a regular `enum` in a lot of languages, the
 `Failure` case also carries some data (the `reason` field) alongside it.
 
+## Using Java classes
+
 We could represent this in Java using a class, but it feels more clunky:
 
 ```java
@@ -150,3 +152,77 @@ It's getting a little hard to follow. You can imagine this might grow in
 complexity over time, other engineers might add additional states that require
 other data to be stored, and we haven't even discussed how to get data out of
 this object yet.
+
+If we've got an instance of our decision, how do we work out which one we have?
+Well that's easy, we just look at the decision type:
+
+```java
+Decision decision = Decision.failure(FailureReason.INSUFFICIENT_EVIDENCE);
+
+if (decision.getDecisionType() == DecisionType.FAILURE) {
+    // what type should this be?
+    var failureReason = decision.getFailureReason();
+}
+```
+
+It becomes more complicated when we try and get other attributes from it. We
+now need to know that if the decision type is `FAILURE`, we should expect to
+have a `failureReason` property. However, what should `getFailureReason`
+return?
+
+Our two options are:
+
+- Return `FailureReason` and return `null` if it's not a failure, which isn't
+  obvious from the signature
+- Return `Optional<FailureReason>` and force us to always handle the
+  `Optional.empty()` case, even if we know it's a failure
+
+Neither of these are particularly fun to work with.
+
+## The sealed interface approach
+
+Regular interfaces allow us to express this type hierarchy more easily, but
+sealed interfaces specifically enable some additional language features and
+document our options better.
+
+Here's what the code above might look like if we represented it with a sealed
+interface instead:
+
+```java
+public sealed interface Decision permits Success, Failure, Referral {
+    public record Success() implements Decision {}
+
+    public record Failure(FailureReason reason) implements Decision {}
+
+    public record Referral(Team team, ReferralReason reason) implements Decision {}
+}
+```
+
+Now, we've defined each of our decision types as a separate record, all
+implementing the `Decision` marker interface. Each record clearly tells us
+which parameters are relevant to it, and we can choose simpler names for the
+variables since there's no overlap.
+
+Instances of `Decision` are still easy to create, and they compose nicely with
+`switch` statements:
+
+```java
+Decision failure = new Decision.Failure(FailureReason.INSUFFICIENT_EVIDENCE);
+
+switch (failure) {
+    case Success() -> ...,
+    case Failure(reason) -> ...,
+    case Referral(team, reason) -> ...,
+}
+```
+
+There are two nice benefits we get here:
+
+- The compiler can guarantee that only these three states can exist in our
+  `switch` cases, so we don't have to handle anything else (other than `null`
+  if needed)
+- We can use pattern matching to extract the fields of the object directly
+
+In general, this leads to code which expresses its intention better, as we can
+list all the representations we expect and what the objects should be storing
+in each of them.
