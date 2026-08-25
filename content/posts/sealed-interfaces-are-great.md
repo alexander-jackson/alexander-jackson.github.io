@@ -150,10 +150,11 @@ public static class Decision {
 }
 ```
 
-It's getting a little hard to follow. You can imagine this might grow in
-complexity over time, other engineers might add additional states that require
-other data to be stored, and we haven't even discussed how to get data out of
-this object yet.
+Having four constructor parameters, where three of them are generally `null`,
+makes this approach quite difficult to follow. You can imagine this might grow
+in complexity over time, other engineers might add additional states that
+require other data to be stored, and we haven't even discussed how to get data
+out of this object yet.
 
 ### Retrieving stored information
 
@@ -193,7 +194,7 @@ Here's what the code above might look like if we represented it with a sealed
 interface instead:
 
 ```java
-public sealed interface Decision permits Success, Failure, Referral {
+public sealed interface Decision {
     public record Success() implements Decision {}
 
     public record Failure(FailureReason reason) implements Decision {}
@@ -206,6 +207,17 @@ Now, we've defined each of our decision types as a separate record, all
 implementing the `Decision` marker interface. Each record clearly tells us
 which parameters are relevant to it, and we can choose simpler names for the
 variables since there's no overlap.
+
+Note, if the variants are not nested inside the interface, you'd need a
+`permits` clause as well:
+
+```java
+public sealed interface Decision permits Success, Failure, Referral {}
+
+// definitions in separate files
+```
+
+The compiler automatically infers this clause if the records are nested though.
 
 Instances of `Decision` are still easy to create, and they compose nicely with
 `switch` statements:
