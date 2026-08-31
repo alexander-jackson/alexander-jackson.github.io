@@ -1,7 +1,7 @@
 ---
 title: "Helping The Query Planner"
-date: 2026-08-26T16:31:32+01:00
-draft: true
+date: 2026-08-31T12:49:00+01:00
+draft: false
 showtoc: true
 ---
 
