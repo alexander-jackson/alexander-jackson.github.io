@@ -72,6 +72,17 @@ Unfortunately, reality doesn't always play out as you might expect. It turns
 out, PostgreSQL prefers the index `pk_transfer` and instead searches the table
 in order of `id` value until it finds something in this range.
 
+This is because the planner has a special path for `MIN` and `MAX` operations
+which rewrites the query to be similar to the following:
+
+```sql
+SELECT id
+FROM transfer
+WHERE created_at BETWEEN '2026-07-01' AND '2026-07-03'
+ORDER BY id
+LIMIT 1
+```
+
 If the search window is recent, this means it will essentially perform a
 sequential scan on all the rows of the table up until the lower bound of the
 range.
@@ -95,10 +106,8 @@ We can see that it performed an `Index Scan using pk_transfer` on the
 This filter removed 4.9m rows, implying it had to scan all those rows and
 remove them before it found enough data in the range to satisfy the query.
 
-Instead, we can rewrite the query to encourage usage of our index and try to
-better convey what we are trying to find.
-
-In the following query, we use a common table expression (CTE) to first find
+Instead, we can rewrite the query to steer the planner toward our index. With
+the following approach, we use a common table expression (CTE) to first find
 all the rows in the time range and then another query to filter for the minimum
 `id` value:
 
