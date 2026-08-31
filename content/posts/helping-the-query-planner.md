@@ -50,7 +50,7 @@ ON transfer (created_at)
 In theory, this should allow the database to quickly find the rows that it is
 interested in, and then find the minimum `id` value for us.
 
-## In practice
+### In practice
 
 Unfortunately, reality doesn't always play out as you might expect. It turns
 out, PostgreSQL prefers the index `pk_transfer` and instead searches the table
