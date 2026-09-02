@@ -122,8 +122,9 @@ Oh. No it doesn't. Since there's so little data in the table, PostgreSQL still
 decides that it's faster to just sequentially scan all the rows.
 
 Indexes aren't always appropriate until you have a certain amount of data in the
-table, but having one there won't make your queries slower, it just adds a
-little bit of extra work when inserting data.
+table, but having one there won't make your queries slower. They do induce some
+cost, both making insert and updates slightly slower and requiring additional
+storage space.
 
 If we increase the
 [number of names](https://github.com/danielmiessler/SecLists/blob/master/Usernames/Names/names.txt)
@@ -195,7 +196,7 @@ We can check whether this has improved the performance of our query by using the
 
 As we can see, the query with the index is around 10 times faster than the one
 without, even with a relatively small amount of data in the table. This
-difference will only increases as the size of the table grows, which is why
+difference will only increase as the size of the table grows, which is why
 indexes are so important for performance.
 
 ## How they work
